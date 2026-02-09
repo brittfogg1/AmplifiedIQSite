@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Amplified IQ | Human creativity. AI amplified.</title>
+  <meta name="description" content="Amplified IQ helps teams turn ideas into intelligent, scalable products through a 4-hub loop: Ignite → Forge → Enable → Amplify → Ignite." />
+  <meta name="theme-color" content="#0b1020" />
+
+  <style>
+    :root{
+      --bg: #070a14;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.09);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --faint: rgba(255,255,255,.50);
+      --line: rgba(255,255,255,.12);
+      --shadow: 0 24px 70px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 26px;
+
+      --a: #7c3aed; /* violet */
+      --b: #22d3ee; /* cyan */
+      --c: #34d399; /* green */
+      --d: #f59e0b; /* amber */
+
+      --max: 1160px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(1000px 500px at 20% 0%, rgba(124,58,237,.25), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(34,211,238,.18), transparent 55%),
+        radial-gradient(900px 500px at 60% 90%, rgba(52,211,153,.14), transparent 55%),
+        linear-gradient(180deg, #050713 0%, #070a14 40%, #050713 100%);
+      overflow-x: hidden;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+
+    /* Top nav */
+    .nav{
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,10,20,.55);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 14px 0;
+      gap: 18px;
+    }
+    .brand{
+      display:flex; align-items:center; gap: 10px;
+      font-weight: 750;
+      letter-spacing: .2px;
+    }
+    .mark{
+      width: 34px; height: 34px;
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 40%),
+        linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,211,238,.85));
+      box-shadow: 0 14px 32px rgba(124,58,237,.25);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .nav-links{
+      display:flex; gap: 16px; flex-wrap: wrap;
+      color: var(--muted);
+      font-weight: 550;
+      font-size: 14px;
+    }
+    .nav-links a{
+      padding: 10px 10px;
+      border-radius: 12px;
+      transition: background .2s ease, color .2s ease;
+    }
+    .nav-links a:hover{
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+    }
+    .nav-cta{
+      display:flex; align-items:center; gap: 10px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      font-weight: 650;
+      font-size: 14px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.32);
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      cursor:pointer;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.22); }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,211,238,.85));
+      border-color: rgba(255,255,255,.18);
+    }
+    .btn.primary:hover{ background: linear-gradient(135deg, rgba(124,58,237,1), rgba(34,211,238,.95)); }
+
+    /* Hero */
+    .hero{
+      padding: 56px 0 28px;
+      position: relative;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 22px;
+      align-items: start;
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      font-weight: 650;
+      font-size: 13px;
+    }
+    .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--a), var(--b));
+      box-shadow: 0 0 0 6px rgba(124,58,237,.12);
+    }
+    h1{
+      margin: 14px 0 0;
+      font-size: clamp(34px, 4.4vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -0.7px;
+    }
+    .subhead{
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.55;
+      max-width: 58ch;
+    }
+    .hero-actions{
+      margin-top: 18px;
+      display:flex; gap: 10px; flex-wrap: wrap;
+    }
+    .mini{
+      margin-top: 14px;
+      color: var(--faint);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* Right hero card */
+    .card{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .card .inner{ padding: 18px; }
+    .card h3{
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: -.2px;
+    }
+    .card p{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .badge-row{
+      margin-top: 14px;
+      display:flex; flex-wrap:wrap; gap: 8px;
+    }
+    .badge{
+      font-size: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      font-weight: 650;
+    }
+    .card .footer{
+      padding: 14px 18px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      align-items:center;
+      flex-wrap: wrap;
+    }
+
+    /* Sections */
+    section{ padding: 34px 0; }
+    .section-title{
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .section-head h2{
+      margin: 0;
+      font-size: clamp(22px, 2.6vw, 32px);
+      letter-spacing: -.4px;
+      line-height: 1.15;
+    }
+    .section-head p{
+      margin: 0;
+      color: var(--muted);
+      max-width: 62ch;
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    /* Hub grid */
+    .grid-4{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .hub{
+      padding: 16px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      min-height: 240px;
+    }
+    .hub:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.18);
+    }
+    .hub-top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .hub-name{
+      display:flex; align-items:center; gap: 10px;
+      font-weight: 800;
+      letter-spacing: -.2px;
+    }
+    .hub-ico{
+      width: 30px; height: 30px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      display:grid; place-items:center;
+    }
+    .hub-tag{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .hub p{
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .hub ul{
+      margin: 0;
+      padding-left: 18px;
+      color: rgba(255,255,255,.78);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .hub ul li{ margin: 6px 0; }
+    .accent-a{ box-shadow: 0 0 0 1px rgba(124,58,237,.25) inset; }
+    .accent-b{ box-shadow: 0 0 0 1px rgba(34,211,238,.25) inset; }
+    .accent-c{ box-shadow: 0 0 0 1px rgba(52,211,153,.22) inset; }
+    .accent-d{ box-shadow: 0 0 0 1px rgba(245,158,11,.18) inset; }
+
+    /* Loop + value layout */
+    .two-col{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .panel{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .panel .inner{ padding: 18px; }
+    .panel h3{ margin: 0 0 8px; font-size: 16px; letter-spacing: -.2px; }
+    .panel p{ margin: 0; color: var(--muted); line-height: 1.65; font-size: 14px; }
+    .bullets{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .bullet{
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+    }
+    .bullet b{ display:block; font-size: 13px; }
+    .bullet span{ display:block; margin-top: 4px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+
+    /* CTA */
+    .cta{
+      padding: 34px 0 56px;
+    }
+    .cta-box{
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(900px 320px at 20% 20%, rgba(124,58,237,.28), transparent 60%),
+        radial-gradient(900px 320px at 85% 35%, rgba(34,211,238,.18), transparent 55%),
+        rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position: relative;
+    }
+    .cta-inner{
+      padding: 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .cta-inner h2{ margin:0; font-size: clamp(20px, 2.4vw, 30px); letter-spacing: -.4px; }
+    .cta-inner p{ margin:8px 0 0; color: var(--muted); max-width: 65ch; line-height: 1.65; font-size: 14px; }
+
+    /* Footer */
+    footer{
+      border-top: 1px solid var(--line);
+      padding: 20px 0 30px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .foot{
+      display:flex; justify-content:space-between; align-items:center;
+      gap: 12px; flex-wrap: wrap;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .grid-4{ grid-template-columns: repeat(2, 1fr); }
+      .two-col{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px){
+      .grid-4{ grid-template-columns: 1fr; }
+      .nav-links{ display:none; }
+      .btn{ width: 100%; }
+      .nav-cta{ width: 100%; }
+      .nav-inner{ align-items:flex-start; flex-direction: column; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="wrap">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="Amplified IQ home">
+          <span class="mark" aria-hidden="true"></span>
+          <span>Amplified IQ</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#model">Model</a>
+          <a href="#hubs">Four Hubs</a>
+          <a href="#loop">Loop</a>
+          <a href="#who">Who it's for</a>
+        </nav>
+
+        <div class="nav-cta">
+          <a class="btn" href="#contact">Talk to us</a>
+          <a class="btn primary" href="#contact">Get a 30-min discovery</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header id="top" class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="kicker"><span class="dot" aria-hidden="true"></span> Human creativity. AI amplified.</div>
+          <h1>Your talent, exponentially amplified with AI.</h1>
+          <p class="subhead">
+            Amplified IQ’s four hubs work together to turn ideas into intelligent, scalable products —
+            from first spark to real-world adoption, support, and growth.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#hubs">Explore the 4-hub model</a>
+            <a class="btn" href="#contact">Schedule a conversation</a>
+          </div>
+
+          <p class="mini">
+            Built for small-to-mid teams who need real outcomes—faster. We pair experienced humans with AI partners
+            so every iteration gets smarter, cheaper, and quicker.
+          </p>
+        </div>
+
+        <aside class="card" aria-label="What we do">
+          <div class="inner">
+            <h3>What Amplified IQ delivers</h3>
+            <p>
+              A repeatable, AI-first product loop that reduces time-to-value and improves quality—without replacing humans.
+              We amplify the team you already have.
+            </p>
+            <div class="badge-row">
+              <span class="badge">AI + human pairing</span>
+              <span class="badge">Product + process</span>
+              <span class="badge">MVP → SaaS ready</span>
+              <span class="badge">Enablement + support</span>
+            </div>
+          </div>
+          <div class="footer">
+            <span style="color:var(--faint); font-weight:650;">Ignite → Forge → Enable → Amplify</span>
+            <a class="btn" href="#loop" style="padding:9px 12px;">See the loop</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <!-- MODEL -->
+  <section id="model">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-title">The model</div>
+          <h2>A four-hub system that turns ideas into durable products.</h2>
+        </div>
+        <p>
+          Each hub has a clear purpose, deliverables, and playbooks. The magic is the loop:
+          you don’t start from scratch each cycle—knowledge, assets, and automation compound over time.
+        </p>
+      </div>
+
+      <div class="two-col" style="margin-top:18px;">
+        <div class="panel">
+          <div class="inner">
+            <h3>AI is the accelerator, not the replacement</h3>
+            <p>
+              We work in a hybrid environment where every human is paired with an AI partner.
+              The result: faster research, stronger prototypes, better documentation, and higher-quality execution.
+            </p>
+
+            <div class="bullets">
+              <div class="bullet">
+                <b>Speed without shortcuts</b>
+                <span>AI reduces friction so experienced judgment can focus on decisions, not busywork.</span>
+              </div>
+              <div class="bullet">
+                <b>Repeatability</b>
+                <span>Reusable patterns, components, and runbooks make each iteration cheaper and smoother.</span>
+              </div>
+              <div class="bullet">
+                <b>Outcomes-first</b>
+                <span>We measure value in adoption, productivity gains, and revenue readiness—not “activity.”</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="inner">
+            <h3>From internal tool to commercial SaaS</h3>
+            <p>
+              If your plan is monetization, we engineer beyond “it works”:
+              multi-tenant readiness, security posture, supportability, and operations.
+            </p>
+
+            <div class="bullets">
+              <div class="bullet">
+                <b>Commercial-grade design</b>
+                <span>Identity, roles, logging, billing readiness, and deployment strategy informed early.</span>
+              </div>
+              <div class="bullet">
+                <b>Scale assumptions made explicit</b>
+                <span>5 customers vs. 50 customers changes everything—tooling, cost, and support models.</span>
+              </div>
+              <div class="bullet">
+                <b>Profitability minded</b>
+                <span>We target healthy support ratios and automated operations to protect margins.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HUBS -->
+  <section id="hubs">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-title">Four hubs</div>
+          <h2>Ignite, Forge, Enable, Amplify—each with a job to do.</h2>
+        </div>
+        <p>
+          Move from opportunity to product to adoption. Then loop back with real-world feedback and new ideas.
+        </p>
+      </div>
+
+      <div class="grid-4">
+        <article class="hub accent-a">
+          <div class="hub-top">
+            <div class="hub-name">
+              <span class="hub-ico" aria-hidden="true">🔥</span> Ignite
+            </div>
+            <span class="hub-tag">Discover</span>
+          </div>
+          <p>Identify high-value problems and validate the opportunity.</p>
+          <ul>
+            <li>Pick 2–3 jobs/functions to optimize</li>
+            <li>Map workflows, constraints, and stakeholders</li>
+            <li>Opportunity scoring & ROI hypotheses</li>
+            <li>AI/tooling landscape scan</li>
+            <li>Define MVP + success metrics</li>
+          </ul>
+        </article>
+
+        <article class="hub accent-b">
+          <div class="hub-top">
+            <div class="hub-name">
+              <span class="hub-ico" aria-hidden="true">⚒️</span> Forge
+            </div>
+            <span class="hub-tag">Build</span>
+          </div>
+          <p>Design and build the product with AI-accelerated delivery.</p>
+          <ul>
+            <li>Architecture & prototype</li>
+            <li>UX flow + core features</li>
+            <li>Integrations & automation</li>
+            <li>Security + data handling plan</li>
+            <li>MVP → production path</li>
+          </ul>
+        </article>
+
+        <article class="hub accent-c">
+          <div class="hub-top">
+            <div class="hub-name">
+              <span class="hub-ico" aria-hidden="true">🧰</span> Enable
+            </div>
+            <span class="hub-tag">Adopt</span>
+          </div>
+          <p>Drive adoption with enablement, training, and operational readiness.</p>
+          <ul>
+            <li>Rollout plan + onboarding</li>
+            <li>Training & AI workflows</li>
+            <li>Support model & knowledge base</li>
+            <li>Monitoring, SLAs, runbooks</li>
+            <li>Feedback loops + iteration</li>
+          </ul>
+        </article>
+
+        <article class="hub accent-d">
+          <div class="hub-top">
+            <div class="hub-name">
+              <span class="hub-ico" aria-hidden="true">📈</span> Amplify
+            </div>
+            <span class="hub-tag">Scale</span>
+          </div>
+          <p>Scale impact—and if desired, scale revenue through commercialization.</p>
+          <ul>
+            <li>Usage analytics & optimization</li>
+            <li>Feature expansion from real data</li>
+            <li>Multi-customer/SaaS readiness</li>
+            <li>Support automation & ops efficiency</li>
+            <li>Go-to-market enablement</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOOP -->
+  <section id="loop">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-title">The loop</div>
+          <h2>A compounding system—each cycle gets faster and smarter.</h2>
+        </div>
+        <p>
+          The output of each hub becomes reusable input for the next run. Patterns, components, playbooks,
+          and learned constraints turn into acceleration.
+        </p>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <div class="inner">
+            <h3>The Amplified IQ loop</h3>
+            <p style="margin-bottom:12px;">
+              Ignite → Forge → Enable → Amplify → Ignite
+            </p>
+
+            <!-- Inline SVG loop diagram -->
+            <svg viewBox="0 0 720 360" width="100%" height="auto" role="img" aria-label="Amplified IQ loop diagram">
+              <defs>
+                <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="rgba(124,58,237,1)"/>
+                  <stop offset="1" stop-color="rgba(34,211,238,1)"/>
+                </linearGradient>
+                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="6" result="blur"/>
+                  <feMerge>
+                    <feMergeNode in="blur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <rect x="14" y="14" width="692" height="332" rx="22"
+                    fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.12)"/>
+
+              <!-- Loop path -->
+              <path d="M170,180 C170,85 255,40 360,40 C465,40 550,85 550,180 C550,275 465,320 360,320 C255,320 170,275 170,180"
+                    fill="none" stroke="url(#g1)" stroke-width="10" stroke-linecap="round" filter="url(#glow)"/>
+
+              <!-- Nodes -->
+              <g font-family="ui-sans-serif, system-ui" font-weight="700" fill="rgba(255,255,255,.92)">
+                <circle cx="360" cy="40" r="22" fill="rgba(124,58,237,.95)" stroke="rgba(255,255,255,.18)"/>
+                <text x="360" y="46" text-anchor="middle" font-size="12">Ignite</text>
+
+                <circle cx="550" cy="180" r="22" fill="rgba(34,211,238,.9)" stroke="rgba(255,255,255,.18)"/>
+                <text x="550" y="186" text-anchor="middle" font-size="12">Forge</text>
+
+                <circle cx="360" cy="320" r="22" fill="rgba(52,211,153,.85)" stroke="rgba(255,255,255,.18)"/>
+                <text x="360" y="326" text-anchor="middle" font-size="12">Enable</text>
+
+                <circle cx="170" cy="180" r="22" fill="rgba(245,158,11,.85)" stroke="rgba(255,255,255,.18)"/>
+                <text x="170" y="186" text-anchor="middle" font-size="12">Amplify</text>
+              </g>
+
+              <!-- Arrow hints -->
+              <g fill="rgba(255,255,255,.55)">
+                <path d="M430 58 l18 8 -16 12" />
+                <path d="M560 250 l-8 18 -12 -16" />
+                <path d="M290 332 l-18 -8 16 -12" />
+                <path d="M160 110 l8 -18 12 16" />
+              </g>
+            </svg>
+
+            <p style="margin-top:12px; color: var(--muted);">
+              The loop is intentional: as you iterate, your library of assets grows—workflows, components, prompts,
+              integrations, tests, docs, and support playbooks.
+            </p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="inner">
+            <h3>What “compounding” looks like</h3>
+            <p>
+              Every cycle produces reusable building blocks that accelerate the next one. This is how small teams
+              start operating like much larger teams.
+            </p>
+
+            <div class="bullets">
+              <div class="bullet">
+                <b>Reusable delivery kit</b>
+                <span>Templates, patterns, and automations for faster discovery, build, and rollout.</span>
+              </div>
+              <div class="bullet">
+                <b>Institutional knowledge captured</b>
+                <span>Decisions, tradeoffs, and constraints are documented so the team doesn’t relearn them.</span>
+              </div>
+              <div class="bullet">
+                <b>Support + ops engineered early</b>
+                <span>Better reliability, lower support load, and predictable scaling costs.</span>
+              </div>
+              <div class="bullet">
+                <b>Improvement from real usage</b>
+                <span>Instrumentation and feedback close the loop with measurable outcomes.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-title">Who it’s for</div>
+          <h2>Teams that need outcomes, not experiments.</h2>
+        </div>
+        <p>
+          Especially strong for small-to-medium organizations that want a competitive edge through AI-enabled
+          productivity and custom product development.
+        </p>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <div class="inner">
+            <h3>Great fit if you…</h3>
+            <div class="bullets">
+              <div class="bullet"><b>Want to modernize a core workflow</b><span>Replace manual work with integrated AI + automation.</span></div>
+              <div class="bullet"><b>Need a product built quickly</b><span>MVP now, commercial-grade path later.</span></div>
+              <div class="bullet"><b>Care about adoption</b><span>Enablement and support are part of the plan, not an afterthought.</span></div>
+              <div class="bullet"><b>Plan to monetize</b><span>We engineer for multi-customer, security, and operational efficiency.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="inner">
+            <h3>Typical outcomes</h3>
+            <div class="bullets">
+              <div class="bullet"><b>Productivity gains</b><span>Less time in busywork, more time in high-value decisions.</span></div>
+              <div class="bullet"><b>Faster time-to-value</b><span>AI-accelerated build and iteration, anchored by experienced leadership.</span></div>
+              <div class="bullet"><b>Lower support burden</b><span>Automation, tooling, and documentation improve support ratios.</span></div>
+              <div class="bullet"><b>Durable systems</b><span>Scalable architecture and practices that last beyond the first launch.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA / CONTACT -->
+  <section id="contact" class="cta">
+    <div class="wrap">
+      <div class="cta-box">
+        <div class="cta-inner">
+          <div>
+            <h2>Ready to amplify your team?</h2>
+            <p>
+              Let’s identify 2–3 high-impact jobs or workflows and map an Ignite → Forge → Enable → Amplify plan
+              with measurable outcomes.
+            </p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn primary" href="mailto:hello@amplifiediq.ai?subject=Amplified%20IQ%20Discovery%20Call">Email hello@amplifiediq.ai</a>
+            <a class="btn" href="#top">Back to top</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span class="mark" aria-hidden="true" style="width:22px; height:22px; border-radius:10px;"></span>
+          <span>© <span id="y"></span> AmplifiedIQ.ai</span>
+        </div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="#model">Model</a>
+          <a href="#hubs">Hubs</a>
+          <a href="#loop">Loop</a>
+          <a href="mailto:hello@amplifiediq.ai">hello@amplifiediq.ai</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // tiny enhancement: current year + smooth anchors
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Smooth scrolling for in-page anchors
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest("a[href^='#']");
+      if (!a) return;
+      const id = a.getAttribute("href");
+      if (!id || id === "#") return;
+      const el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      history.pushState(null, "", id);
+    });
+  </script>
+</body>
+</html>
