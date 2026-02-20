@@ -6,7 +6,508 @@
   <title>Amplified IQ | Human creativity. AI amplified.</title>
   <meta name="description" content="Amplified IQ uses AI to create products ready for deployment via subscriptions. Ignite defines requirements and market; Forge builds with full PLG support." />
   <meta name="theme-color" content="#0b1020" />
-
+  <style>
+    :root {
+      --black: #08080a;
+      --white: #f2f0eb;
+      --cyan: #00f5d4;
+      --electric: #7b2fff;
+      --gold: #ffd60a;
+      --mid: #1a1a24;
+    }
+  
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Syne', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+  
+    /* ─── HERO SECTION ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 60px 40px;
+      overflow: hidden;
+    }
+  
+    /* animated grid bg */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,245,212,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,245,212,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridShift 20s linear infinite;
+    }
+  
+    @keyframes gridShift {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(60px); }
+    }
+  
+    /* radial glow */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(123,47,255,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+  
+    /* ─── LOGO MARK ─── */
+    .logo-container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      animation: fadeUp 1s ease both;
+    }
+  
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  
+    .mark {
+      position: relative;
+      width: 140px;
+      height: 140px;
+    }
+  
+    .mark svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 24px rgba(0,245,212,0.5)) drop-shadow(0 0 60px rgba(123,47,255,0.4));
+      animation: pulse 3s ease-in-out infinite;
+    }
+  
+    @keyframes pulse {
+      0%, 100% { filter: drop-shadow(0 0 24px rgba(0,245,212,0.5)) drop-shadow(0 0 60px rgba(123,47,255,0.4)); }
+      50%       { filter: drop-shadow(0 0 40px rgba(0,245,212,0.8)) drop-shadow(0 0 80px rgba(123,47,255,0.7)); }
+    }
+  
+    /* orbit ring */
+    .orbit {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 170px; height: 170px;
+      border: 1px solid rgba(0,245,212,0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: spin 8s linear infinite;
+    }
+    .orbit::before {
+      content: '';
+      position: absolute;
+      top: -4px; left: 50%;
+      width: 8px; height: 8px;
+      background: var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--cyan);
+    }
+  
+    @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+  
+    .orbit2 {
+      width: 200px; height: 200px;
+      border-color: rgba(123,47,255,0.2);
+      animation: spin 12s linear infinite reverse;
+    }
+    .orbit2::before { background: var(--electric); box-shadow: 0 0 10px var(--electric); }
+  
+    /* ─── WORDMARK ─── */
+    .wordmark {
+      text-align: center;
+    }
+  
+    .brand-name {
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 0.9;
+      color: rgba(242,240,235,0.55);
+    }
+  
+    /* The A in Amplified — pops as the "A" of AI */
+    .brand-name .ai-a {
+      display: inline-block;
+      position: relative;
+      font-size: 1.22em;
+      line-height: 1;
+      font-weight: 800;
+      background: linear-gradient(160deg, #00f5d4 0%, #7b2fff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 18px rgba(0,245,212,0.7)) drop-shadow(0 0 40px rgba(123,47,255,0.5));
+      animation: aiGlow 2.5s ease-in-out infinite;
+      vertical-align: baseline;
+    }
+  
+    /* underline indicator under the A */
+    .brand-name .ai-a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #00f5d4, #7b2fff);
+      border-radius: 2px;
+      box-shadow: 0 0 10px rgba(0,245,212,0.8);
+    }
+  
+    /* "mplified" — subdued */
+    .brand-name .rest {
+      color: rgba(242,240,235,0.45);
+      font-size: 0.88em;
+      letter-spacing: -1px;
+    }
+  
+    /* IQ block — the "I" pops */
+    .brand-name .iq {
+      display: inline-block;
+      position: relative;
+      margin-left: 6px;
+    }
+  
+    /* The I in IQ — pops as the "I" of AI */
+    .brand-name .ai-i {
+      display: inline-block;
+      position: relative;
+      font-size: 1.22em;
+      line-height: 1;
+      background: linear-gradient(160deg, #ffd60a 0%, #00f5d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 18px rgba(255,214,10,0.7)) drop-shadow(0 0 40px rgba(0,245,212,0.5));
+      animation: aiGlow 2.5s 0.4s ease-in-out infinite;
+      vertical-align: baseline;
+    }
+  
+    .brand-name .ai-i::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #ffd60a, #00f5d4);
+      border-radius: 2px;
+      box-shadow: 0 0 10px rgba(255,214,10,0.8);
+    }
+  
+    /* Q — same size as I */
+    .brand-name .q-letter {
+      color: rgba(242,240,235,0.45);
+      font-size: 1.22em;
+    }
+  
+    @keyframes aiGlow {
+      0%, 100% { filter: drop-shadow(0 0 18px rgba(0,245,212,0.6)) drop-shadow(0 0 40px rgba(123,47,255,0.4)) brightness(1); }
+      50%       { filter: drop-shadow(0 0 30px rgba(0,245,212,1))   drop-shadow(0 0 60px rgba(123,47,255,0.8)) brightness(1.3); }
+    }
+  
+    /* floating "AI" badge that appears above */
+    .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(0,245,212,0.5);
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--cyan);
+      margin-bottom: 16px;
+      animation: fadeUp 1s 0.15s ease both;
+      backdrop-filter: blur(8px);
+    }
+    .ai-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+      animation: blink 1.4s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.2; }
+    }
+  
+    .tagline {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: rgba(242,240,235,0.35);
+      margin-top: 16px;
+    }
+  
+    /* AI connector arc between A and I */
+    .ai-connector {
+      display: block;
+      position: relative;
+      height: 0;
+      overflow: visible;
+      pointer-events: none;
+    }
+  
+    /* ─── BRAND STRIP ─── */
+    .brand-strip {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 52px;
+      animation: fadeUp 1s 0.3s ease both;
+    }
+  
+    .pill {
+      padding: 8px 20px;
+      border-radius: 999px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .pill-outline {
+      border: 1px solid rgba(0,245,212,0.4);
+      color: var(--cyan);
+    }
+    .pill-solid {
+      background: var(--electric);
+      color: var(--white);
+    }
+    .pill-gold {
+      background: var(--gold);
+      color: var(--black);
+    }
+    .divider {
+      width: 1px; height: 20px;
+      background: rgba(255,255,255,0.15);
+    }
+  
+    /* ─── BRAND BLOCK ─── */
+    .brand-block {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      position: relative;
+      z-index: 2;
+    }
+  
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(0,245,212,0.2);
+    }
+  
+    /* ─── COLOR PALETTE ─── */
+    .palette-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+  
+    .swatch {
+      flex: 1;
+      min-width: 120px;
+      height: 120px;
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    .swatch:hover { transform: translateY(-6px); }
+    .swatch-label {
+      position: absolute;
+      bottom: 12px; left: 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+    .sw1 { background: #08080a; border: 1px solid rgba(255,255,255,0.08); }
+    .sw2 { background: #00f5d4; }
+    .sw3 { background: #7b2fff; }
+    .sw4 { background: #ffd60a; }
+    .sw5 { background: #f2f0eb; }
+    .sw1 .swatch-label { color: rgba(242,240,235,0.5); }
+    .sw2 .swatch-label, .sw3 .swatch-label { color: rgba(8,8,10,0.8); }
+    .sw4 .swatch-label { color: rgba(8,8,10,0.8); }
+    .sw5 .swatch-label { color: rgba(8,8,10,0.6); }
+  
+    /* ─── LOGO VARIANTS ─── */
+    .variants-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+  
+    .variant-card {
+      background: var(--mid);
+      border-radius: 20px;
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: border-color 0.3s;
+    }
+    .variant-card:hover { border-color: rgba(0,245,212,0.3); }
+  
+    .variant-card.dark-card {
+      background: #f2f0eb;
+    }
+    .variant-card.electric-card {
+      background: linear-gradient(135deg, #7b2fff, #3d00c0);
+    }
+  
+    .card-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(242,240,235,0.35);
+    }
+    .electric-card .card-label { color: rgba(242,240,235,0.6); }
+    .dark-card .card-label { color: rgba(8,8,10,0.4); }
+  
+    .mini-wordmark {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--white), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .dark-card .mini-wordmark {
+      background: linear-gradient(135deg, #08080a, #7b2fff);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+    .electric-card .mini-wordmark {
+      background: linear-gradient(135deg, var(--white), var(--gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+  
+    /* ─── TYPOGRAPHY SPECIMEN ─── */
+    .type-specimen {
+      background: var(--mid);
+      border-radius: 20px;
+      padding: 50px;
+      margin-bottom: 60px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+  
+    .specimen-display {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .specimen-mono {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--cyan);
+      letter-spacing: 3px;
+      margin-bottom: 28px;
+    }
+    .specimen-body {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(242,240,235,0.6);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+  
+    /* ─── AI MARK DETAIL ─── */
+    .ai-mark-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+  
+    @media (max-width: 640px) {
+      .ai-mark-section { grid-template-columns: 1fr; }
+      .hero::before { background-size: 40px 40px; }
+    }
+  
+    .ai-mark-card {
+      background: var(--mid);
+      border-radius: 20px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      border: 1px solid rgba(255,255,255,0.06);
+      min-height: 200px;
+    }
+  
+    .mono-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: rgba(242,240,235,0.4);
+      text-align: center;
+      letter-spacing: 1px;
+      line-height: 1.8;
+    }
+  
+    /* ─── FOOTER ─── */
+    .brand-footer {
+      text-align: center;
+      padding: 40px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: rgba(242,240,235,0.2);
+      text-transform: uppercase;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+      z-index: 2;
+    }
+  
+  </style>
   <style>
     :root{
       --bg: #070a14;
@@ -397,25 +898,76 @@
 </head>
 
 <body>
-  <!-- NAV -->
-  <div class="nav">
-    <div class="wrap">
-      <div class="nav-inner">
-        <a class="brand" href="#top" aria-label="Amplified IQ home">
-          <span class="mark" aria-hidden="true"></span>
-          <span>Amplified IQ</span>
-        </a>
+  <section class="hero">
 
-        <nav class="nav-links" aria-label="Primary">
-          <a href="#model">Model</a>
-          <a href="#hubs">Four Hubs</a>
-          <a href="#loop">Loop</a>
-          <a href="#who">Who it's for</a>
-        </nav>
-
+    <div class="logo-container">
+  
+      <!-- SVG MARK: stylized brain / signal wave / AI node -->
+      <div class="mark">
+        <div class="orbit"></div>
+        <div class="orbit orbit2"></div>
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- outer hexagon -->
+          <polygon points="50,5 91,27.5 91,72.5 50,95 9,72.5 9,27.5" stroke="url(#hexGrad)" stroke-width="1.5" fill="none" opacity="0.6"></polygon>
+  
+          <!-- neural nodes -->
+          <circle cx="50" cy="50" r="8" fill="url(#coreGrad)"></circle>
+          <circle cx="50" cy="50" r="13" stroke="url(#coreGrad)" stroke-width="0.8" fill="none" opacity="0.5"></circle>
+  
+          <!-- signal lines from center -->
+          <line x1="50" y1="37" x2="50" y2="18" stroke="url(#lineGrad)" stroke-width="1.5" stroke-linecap="round"></line>
+          <line x1="50" y1="63" x2="50" y2="82" stroke="url(#lineGrad)" stroke-width="1.5" stroke-linecap="round"></line>
+          <line x1="37" y1="43" x2="22" y2="34" stroke="url(#lineGrad)" stroke-width="1.5" stroke-linecap="round"></line>
+          <line x1="63" y1="43" x2="78" y2="34" stroke="url(#lineGrad)" stroke-width="1.5" stroke-linecap="round"></line>
+          <line x1="37" y1="57" x2="22" y2="66" stroke="url(#lineGrad)" stroke-width="1.5" stroke-linecap="round"></line>
+          <line x1="63" y1="57" x2="78" y2="66" stroke="url(#lineGrad)" stroke-width="1.5" stroke-linecap="round"></line>
+  
+          <!-- secondary nodes -->
+          <circle cx="50" cy="18" r="4" fill="#00f5d4"></circle>
+          <circle cx="50" cy="82" r="4" fill="#00f5d4"></circle>
+          <circle cx="22" cy="34" r="4" fill="#7b2fff"></circle>
+          <circle cx="78" cy="34" r="4" fill="#7b2fff"></circle>
+          <circle cx="22" cy="66" r="3" fill="rgba(0,245,212,0.6)"></circle>
+          <circle cx="78" cy="66" r="3" fill="rgba(0,245,212,0.6)"></circle>
+  
+          <!-- AI letterform in center -->
+          <text x="50" y="55" text-anchor="middle" font-family="&#39;Space Mono&#39;, monospace" font-size="11" font-weight="700" fill="#08080a" letter-spacing="-1">AI</text>
+  
+          <defs>
+            <lineargradient id="hexGrad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#00f5d4"></stop>
+              <stop offset="100%" stop-color="#7b2fff"></stop>
+            </lineargradient>
+            <radialgradient id="coreGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#00f5d4"></stop>
+              <stop offset="100%" stop-color="#7b2fff"></stop>
+            </radialgradient>
+            <lineargradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#00f5d4" stop-opacity="0.9"></stop>
+              <stop offset="100%" stop-color="#7b2fff" stop-opacity="0.4"></stop>
+            </lineargradient>
+          </defs>
+        </svg>
       </div>
+  
+      <!-- WORDMARK -->
+      <div class="wordmark">
+        <div class="ai-badge"><span class="ai-badge-dot"></span>AI · POWERED</div>
+        <div class="brand-name"><span class="ai-a">A</span><span class="rest">mplified</span> <span class="iq"><span class="ai-i">I</span><span class="q-letter">Q</span></span></div>
+        <div class="tagline">Intelligence. Amplified.</div>
+      </div>
+  
+      <!-- PILL TAGS -->
+      <div class="brand-strip">
+        <div class="pill pill-outline">AI-Native</div>
+        <div class="divider"></div>
+        <div class="pill pill-solid">Next-Gen</div>
+        <div class="divider"></div>
+        <div class="pill pill-gold">Intelligent</div>
+      </div>
+  
     </div>
-  </div>
+  </section>
 
   <!-- HERO -->
   <header id="top" class="hero">
