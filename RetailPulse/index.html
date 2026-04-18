@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Retail Pulse Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <div class="brand">
+          <div class="brand-mark">RP</div>
+          <div>
+            <strong>Retail Pulse</strong>
+            <span>Market monitor</span>
+          </div>
+        </div>
+
+        <nav class="nav-list">
+          <button class="nav-item active" data-view="dashboard" type="button" title="Dashboard">
+            <span class="icon">⌂</span><span>Dashboard</span>
+          </button>
+          <button class="nav-item" data-view="feed" type="button" title="Alert feed">
+            <span class="icon">≡</span><span>Alert Feed</span>
+          </button>
+          <button class="nav-item" data-view="products" type="button" title="Products">
+            <span class="icon">▦</span><span>Products</span>
+          </button>
+          <button class="nav-item" data-view="digest" type="button" title="Digest">
+            <span class="icon">✉</span><span>Daily Digest</span>
+          </button>
+        </nav>
+
+        <div class="watch-summary">
+          <span class="summary-label">Watchlist</span>
+          <strong>42 SKUs</strong>
+          <span>18 owned · 24 competitors</span>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Saturday, April 18</p>
+            <h1 id="view-title">What changed in the last 24 hours</h1>
+          </div>
+          <div class="topbar-actions">
+            <label class="search">
+              <span>⌕</span>
+              <input id="search-input" type="search" placeholder="Search SKUs, brands, events" />
+            </label>
+            <button class="primary-action" type="button" id="simulate-btn">Run scan</button>
+          </div>
+        </header>
+
+        <section class="view active" id="dashboard-view" aria-labelledby="view-title">
+          <div class="metric-grid">
+            <article class="metric-card risk">
+              <span>High priority alerts</span>
+              <strong id="metric-high">5</strong>
+              <small>+2 since yesterday</small>
+            </article>
+            <article class="metric-card">
+              <span>Price moves</span>
+              <strong>12</strong>
+              <small>7 competitor-led</small>
+            </article>
+            <article class="metric-card">
+              <span>OOS events</span>
+              <strong>3</strong>
+              <small>1 owned SKU</small>
+            </article>
+            <article class="metric-card">
+              <span>Content changes</span>
+              <strong>9</strong>
+              <small>4 image updates</small>
+            </article>
+            <article class="metric-card opportunity">
+              <span>Open opportunities</span>
+              <strong>4</strong>
+              <small>2 pricing, 2 content</small>
+            </article>
+            <article class="metric-card">
+              <span>Review velocity</span>
+              <strong>+18%</strong>
+              <small>category average</small>
+            </article>
+          </div>
+
+          <div class="dashboard-layout">
+            <section class="panel alerts-panel">
+              <div class="panel-heading">
+                <div>
+                  <h2>Top Alerts</h2>
+                  <p>AI-ranked by likely business impact.</p>
+                </div>
+                <button class="ghost-button" data-view-jump="feed" type="button">View all</button>
+              </div>
+              <div id="top-alerts" class="alert-list"></div>
+            </section>
+
+            <section class="panel insight-panel">
+              <div class="panel-heading">
+                <div>
+                  <h2>AI Brief</h2>
+                  <p>What matters before the morning call.</p>
+                </div>
+              </div>
+              <div class="brief">
+                <span class="brief-tag">6-pack by 6am</span>
+                <h3>Competitor promos are pressuring premium pricing.</h3>
+                <p>
+                  Three direct competitors dropped price more than 10% overnight. Your top premium SKU is now 18% above the category median while review velocity has flattened.
+                </p>
+                <div class="action-stack">
+                  <button type="button">Check promo calendar</button>
+                  <button type="button">Prepare buyer note</button>
+                  <button type="button">Watch search rank</button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="feed-view" aria-label="Alert feed">
+          <div class="filters">
+            <button class="filter active" data-filter="all" type="button">All</button>
+            <button class="filter" data-filter="Price" type="button">Price</button>
+            <button class="filter" data-filter="Promo" type="button">Promo</button>
+            <button class="filter" data-filter="Availability" type="button">Availability</button>
+            <button class="filter" data-filter="Content" type="button">Content</button>
+          </div>
+          <div id="feed-list" class="feed-list"></div>
+        </section>
+
+        <section class="view" id="products-view" aria-label="Product workspace">
+          <div class="workspace-grid">
+            <section class="panel product-list-panel">
+              <div class="panel-heading">
+                <div>
+                  <h2>Watchlist</h2>
+                  <p>Owned and competitor products under active monitoring.</p>
+                </div>
+              </div>
+              <div id="product-list" class="product-list"></div>
+            </section>
+            <section class="panel product-detail" id="product-detail"></section>
+          </div>
+        </section>
+
+        <section class="view" id="digest-view" aria-label="Daily digest preview">
+          <div class="digest-shell">
+            <div class="digest-header">
+              <span>Daily Digest</span>
+              <strong>Retail Pulse · April 18, 2026</strong>
+            </div>
+            <h2>5 changes need attention today</h2>
+            <p class="digest-lede">
+              Competitor discounting increased overnight, one owned SKU went out of stock, and a new premium entrant appeared in the category search set.
+            </p>
+            <div id="digest-items" class="digest-items"></div>
+            <div class="digest-footer">
+              <button type="button">Send test email</button>
+              <button class="secondary" type="button">Edit alert rules</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
