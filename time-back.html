@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Give Your Team Their Time Back | Amplified IQ</title>
+  <meta name="description" content="AI-powered systems that eliminate repetitive work so your team gets hours back every week. Practical automation for reports, analysis, meeting prep, and operations." />
+  <meta name="theme-color" content="#070a14" />
+  <style>
+    :root {
+      --bg: #070a14;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.09);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --faint: rgba(255,255,255,.50);
+      --line: rgba(255,255,255,.12);
+      --shadow: 0 24px 70px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 26px;
+      --a: #7c3aed;
+      --b: #22d3ee;
+      --c: #34d399;
+      --d: #f59e0b;
+      --max: 1160px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(1000px 500px at 20% 0%, rgba(124,58,237,.22), transparent 60%),
+        radial-gradient(900px 500px at 85% 15%, rgba(34,211,238,.14), transparent 55%),
+        radial-gradient(800px 400px at 50% 100%, rgba(52,211,153,.10), transparent 50%),
+        linear-gradient(180deg, #050713 0%, #070a14 45%, #050713 100%);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,10,20,.72);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; gap: 18px; flex-wrap: wrap;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 750; letter-spacing: .2px;
+    }
+    .brand-mark {
+      width: 34px; height: 34px; border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 40%),
+        linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,211,238,.85));
+      box-shadow: 0 14px 32px rgba(124,58,237,.25);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .nav-links {
+      display: flex; gap: 8px 16px; flex-wrap: wrap;
+      color: var(--muted); font-weight: 550; font-size: 14px;
+    }
+    .nav-links a {
+      padding: 10px 10px; border-radius: 12px;
+      transition: background .2s ease, color .2s ease;
+    }
+    .nav-links a:hover {
+      background: rgba(255,255,255,.06); color: var(--text);
+    }
+    .nav-cta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px; padding: 11px 18px; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text); font-weight: 650; font-size: 14px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.32);
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      cursor: pointer; font-family: inherit;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.22);
+    }
+    .btn.primary {
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,211,238,.85));
+      border-color: rgba(255,255,255,.18);
+    }
+    .btn.primary:hover {
+      background: linear-gradient(135deg, rgba(124,58,237,1), rgba(34,211,238,.95));
+    }
+
+    .hero {
+      padding: 48px 0 56px;
+      position: relative;
+    }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 14px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--muted); font-weight: 650; font-size: 13px;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--a), var(--b));
+      box-shadow: 0 0 0 6px rgba(124,58,237,.12);
+    }
+    h1 {
+      margin: 18px 0 0;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.06;
+      letter-spacing: -1px;
+      max-width: 14ch;
+    }
+    .lead {
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: clamp(17px, 2.1vw, 20px);
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+    .hero-actions { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-note {
+      margin-top: 22px; color: var(--faint); font-size: 15px;
+      line-height: 1.65; max-width: 58ch;
+    }
+
+    section { padding: 40px 0; }
+    .section-title {
+      font-size: 12px; color: var(--muted);
+      letter-spacing: .2em; text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(26px, 3.2vw, 38px);
+      letter-spacing: -.5px;
+      line-height: 1.15;
+    }
+    .section-head p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.65;
+      max-width: 68ch;
+    }
+    .pull-quote {
+      margin-top: 22px;
+      padding: 20px 22px;
+      border-left: 3px solid rgba(34,211,238,.6);
+      background: rgba(0,0,0,.2);
+      border-radius: 0 14px 14px 0;
+      font-size: 18px;
+      font-weight: 650;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .list-block {
+      margin-top: 22px;
+      display: grid;
+      gap: 10px;
+      max-width: 560px;
+    }
+    .list-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.88);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .list-item::before {
+      content: '';
+      flex-shrink: 0;
+      width: 6px; height: 6px; margin-top: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--b), var(--a));
+    }
+
+    .outcomes {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .outcome {
+      padding: 18px;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+    }
+    .outcome strong {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+    .outcome span { color: var(--muted); font-size: 14px; line-height: 1.55; }
+
+    .grid-3 {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .card {
+      padding: 22px;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      transition: transform .15s ease, border-color .2s ease, background .2s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+    }
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+      letter-spacing: -.2px;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .card-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--b);
+      margin-bottom: 10px;
+    }
+    .accent-1 { box-shadow: 0 0 0 1px rgba(124,58,237,.22) inset; }
+    .accent-2 { box-shadow: 0 0 0 1px rgba(34,211,238,.22) inset; }
+    .accent-3 { box-shadow: 0 0 0 1px rgba(52,211,153,.20) inset; }
+
+    .steps {
+      margin-top: 22px;
+      display: grid;
+      gap: 12px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 18px 20px;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+    }
+    .step-num {
+      width: 36px; height: 36px;
+      border-radius: 12px;
+      display: grid; place-items: center;
+      font-weight: 800;
+      font-size: 14px;
+      background: linear-gradient(135deg, rgba(124,58,237,.5), rgba(34,211,238,.35));
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .step h3 { margin: 0 0 6px; font-size: 16px; }
+    .step p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+    .why-panel {
+      margin-top: 22px;
+      padding: 28px 26px;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(700px 280px at 15% 0%, rgba(124,58,237,.2), transparent 55%),
+        radial-gradient(600px 240px at 90% 30%, rgba(34,211,238,.12), transparent 50%),
+        rgba(255,255,255,.05);
+      box-shadow: var(--shadow);
+    }
+    .why-panel p { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.7; max-width: 72ch; }
+    .why-panel .goal {
+      margin-top: 20px;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .cta-box {
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(900px 320px at 20% 20%, rgba(124,58,237,.28), transparent 60%),
+        radial-gradient(900px 320px at 85% 35%, rgba(34,211,238,.18), transparent 55%),
+        rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .cta-inner {
+      padding: 28px 24px;
+    }
+    .cta-inner h2 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 34px);
+      letter-spacing: -.4px;
+      line-height: 1.15;
+    }
+    .cta-inner > p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+      max-width: 65ch;
+    }
+    .cta-actions { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .form-section {
+      padding: 48px 0 64px;
+    }
+    .form-wrap {
+      max-width: 640px;
+    }
+    .form-intro h2 {
+      margin: 0 0 10px;
+      font-size: clamp(22px, 2.6vw, 28px);
+      letter-spacing: -.3px;
+    }
+    .form-intro p {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 650;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .field { margin-bottom: 18px; }
+    input, textarea, select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      color: var(--text);
+      font-size: 15px;
+      font-family: inherit;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: rgba(34,211,238,.45);
+      box-shadow: 0 0 0 3px rgba(34,211,238,.12);
+    }
+    textarea { min-height: 120px; resize: vertical; line-height: 1.5; }
+    .form-status {
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--c);
+      min-height: 1.4em;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 22px 0 32px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .foot a:hover { color: var(--text); }
+
+    @media (max-width: 900px) {
+      .outcomes, .grid-3 { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .nav-links { display: none; }
+      .btn { width: 100%; justify-content: center; }
+      .nav-cta .btn { width: auto; flex: 1; min-width: 140px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Primary">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Amplified IQ
+      </a>
+      <div class="nav-links">
+        <a href="#problem">Problem</a>
+        <a href="#opportunity">Opportunity</a>
+        <a href="#build">What we build</a>
+        <a href="#approach">Approach</a>
+        <a href="#why-us">Why us</a>
+      </div>
+      <div class="nav-cta">
+        <a class="btn" href="#contact">Contact</a>
+        <a class="btn primary" href="#cta">Get started</a>
+      </div>
+    </div>
+  </nav>
+
+  <header id="top" class="hero">
+    <div class="wrap">
+      <div class="kicker"><span class="dot" aria-hidden="true"></span> Time back for your team</div>
+      <h1>Give Your Team Their Time Back</h1>
+      <p class="lead">
+        AI-powered systems built to eliminate the repetitive, time-consuming work that keeps good people stuck late, buried in reports, and away from what matters most.
+      </p>
+      <p class="lead" style="margin-top: 12px;">
+        We help teams turn hours of manual work into minutes of intelligent automation.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#cta">Let’s Find Your Time Back</a>
+        <a class="btn" href="#problem">See the problem</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="problem">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-title">The problem</div>
+        <h2>Your team isn’t short on talent.<br />They’re short on time.</h2>
+        <p>Every week, high-value people lose hours to:</p>
+      </div>
+      <div class="list-block">
+        <div class="list-item">Pulling reports</div>
+        <div class="list-item">Preparing meeting decks</div>
+        <div class="list-item">Chasing answers</div>
+        <div class="list-item">Reworking spreadsheets</div>
+        <div class="list-item">Repeating the same analysis</div>
+        <div class="list-item">Following up on work that should already be done</div>
+      </div>
+      <p class="pull-quote">That’s not just inefficient. That’s time they don’t get back.</p>
+    </div>
+  </section>
+
+  <section id="opportunity">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-title">The opportunity</div>
+        <h2>AI can do more than speed up tasks.<br />It can give people their evenings back.</h2>
+        <p>
+          We help organizations identify the work that steals the most time — then design AI-powered workflows, agents, and applications that automate the heavy lifting.
+        </p>
+      </div>
+      <div class="outcomes">
+        <div class="outcome">
+          <strong>Less manual work</strong>
+          <span>Automate the recurring tasks that drain your best people.</span>
+        </div>
+        <div class="outcome">
+          <strong>Better decisions</strong>
+          <span>Faster answers and clearer narratives when it counts.</span>
+        </div>
+        <div class="outcome">
+          <strong>More time for life outside work</strong>
+          <span>Protect evenings and focus for what only humans can do.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="build">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-title">What we build</div>
+        <h2>Practical AI solutions for real business workflows</h2>
+        <p>We focus on problems like:</p>
+      </div>
+      <div class="grid-3">
+        <article class="card accent-1">
+          <span class="card-tag">Reviews &amp; narrative</span>
+          <h3>Automated Business Reviews</h3>
+          <p>Turn sales, performance, and operational data into clear executive summaries, action items, and meeting-ready narratives.</p>
+        </article>
+        <article class="card accent-2">
+          <span class="card-tag">Self-serve insight</span>
+          <h3>Ask-the-Data Intelligence</h3>
+          <p>Let teams ask natural-language questions and get fast, contextual answers without waiting on analysts or digging through dashboards.</p>
+        </article>
+        <article class="card accent-3">
+          <span class="card-tag">Coordination</span>
+          <h3>AI Work Orchestration</h3>
+          <p>Assign work to people and AI agents, track progress, automate follow-ups, and keep teams moving without constant manual coordination.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="approach">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-title">Our approach</div>
+        <h2>We start with your time-wasters.</h2>
+        <p>We don’t begin with technology. We begin with one question:</p>
+      </div>
+      <p class="pull-quote" style="border-left-color: rgba(124,58,237,.65);">
+        Where is your team losing time that AI could give back?
+      </p>
+      <p style="margin: 20px 0 8px; color: var(--muted); font-size: 16px;">Then we help you:</p>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div>
+            <h3>Identify repetitive high-value workflows</h3>
+            <p>Map where effort compounds and where automation pays off first.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div>
+            <h3>Prioritize the biggest time-saving opportunities</h3>
+            <p>Focus on changes that return hours per week, not novelty experiments.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div>
+            <h3>Build fast prototypes</h3>
+            <p>Prove value quickly with something your team can touch and react to.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">4</span>
+          <div>
+            <h3>Deploy practical AI tools your team will actually use</h3>
+            <p>Design for adoption: clear inputs, outputs, and ownership.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">5</span>
+          <div>
+            <h3>Measure the hours returned to the business and the people doing the work</h3>
+            <p>Make impact visible so you can scale what works.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why-us">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-title">Why us</div>
+        <h2>Built by people who understand business operations, analytics, and adoption.</h2>
+        <p>
+          We’ve spent decades building analytics and workflow solutions for teams that operate under real-world pressure.
+        </p>
+      </div>
+      <div class="why-panel">
+        <p>We understand that the goal isn’t “AI for AI’s sake.”</p>
+        <p class="goal">The goal is simple: help people do better work, faster — so they can get more of their life back.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta" class="cta" style="padding-top: 20px;">
+    <div class="wrap">
+      <div class="cta-box">
+        <div class="cta-inner">
+          <h2>What could your team stop doing manually?</h2>
+          <p>
+            If your team is buried in recurring reports, manual analysis, meeting prep, follow-ups, or operational busywork, we can help you find the best place to start.
+          </p>
+          <p style="margin-top: 14px; color: var(--text); font-weight: 650;">
+            Let’s identify one workflow that could give your team hours back every week.
+          </p>
+          <div class="cta-actions">
+            <a class="btn primary" href="#contact">Schedule a Time-Back Conversation</a>
+            <a class="btn" href="#contact" data-focus="time-theft">Tell Us What’s Stealing Your Time</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="form-section">
+    <div class="wrap form-wrap">
+      <div class="form-intro">
+        <h2>Let’s solve the right problem first.</h2>
+        <p>Tell us where your team is losing time, and we’ll help identify practical ways AI can give it back.</p>
+      </div>
+      <form id="time-back-form" novalidate>
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" autocomplete="organization" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="time-theft">What kind of work is stealing the most time from your team?</label>
+          <textarea id="time-theft" name="timeTheft" required placeholder="e.g. weekly business reviews, ad-hoc analysis requests…"></textarea>
+        </div>
+        <div class="field">
+          <label for="value">What would it be worth to get 5–10 hours back each week?</label>
+          <textarea id="value" name="value" required placeholder="Rough range, outcomes you’d unlock, or constraints we should know."></textarea>
+        </div>
+        <button type="submit" class="btn primary" style="width: 100%; padding: 14px;">Help Us Get Time Back</button>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="brand-mark" aria-hidden="true" style="width: 22px; height: 22px; border-radius: 10px;"></span>
+          <span>© <span id="y"></span> AmplifiedIQ.ai</span>
+        </div>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+          <a href="index.html">Home</a>
+          <a href="mailto:hello@amplifiediq.ai">hello@amplifiediq.ai</a>
+          <a href="#top">Back to top</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var id = a.getAttribute('href');
+      if (!id || id === '#') return;
+      var el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.pushState(null, '', id);
+      if (a.getAttribute('data-focus') === 'time-theft') {
+        var ta = document.getElementById('time-theft');
+        if (ta) setTimeout(function () { ta.focus(); }, 400);
+      }
+    });
+
+    document.getElementById('time-back-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var status = document.getElementById('form-status');
+      var name = document.getElementById('name').value.trim();
+      var company = document.getElementById('company').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var theft = document.getElementById('time-theft').value.trim();
+      var value = document.getElementById('value').value.trim();
+      if (!name || !company || !email || !theft || !value) {
+        status.textContent = 'Please fill in all fields.';
+        status.style.color = 'rgba(245,158,11,.95)';
+        return;
+      }
+      var body =
+        'Name: ' + name + '\n' +
+        'Company: ' + company + '\n' +
+        'Email: ' + email + '\n\n' +
+        'Work stealing the most time:\n' + theft + '\n\n' +
+        'Worth of 5–10 hours back per week:\n' + value;
+      var subject = encodeURIComponent('Time-back conversation — ' + company);
+      var mail = 'mailto:hello@amplifiediq.ai?subject=' + subject + '&body=' + encodeURIComponent(body);
+      status.textContent = 'Opening your email app…';
+      status.style.color = 'rgba(52,211,153,.95)';
+      window.location.href = mail;
+    });
+  </script>
+</body>
+</html>
