@@ -3,26 +3,32 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AgModel | Poultry Management Platform | Amplified IQ</title>
-  <meta name="description" content="AgModel helps poultry breeders manage raising chickens from hatch through placement at laying or broiler farms. Built with AI + human intelligence for subscription deployment." />
+  <title>AgModel | Breeder Flock Analytics & Forecasting | Amplified IQ</title>
+  <meta name="description" content="AgModel: Breeder flock analytics and forecasting built on the Amplified IQ platform. Move from spreadsheet-driven planning to intelligent production management." />
   <meta name="theme-color" content="#070a14" />
   <style>
     :root {
+      --black: #08080a;
+      --white: #f2f0eb;
+      --cyan: #00f5d4;
+      --electric: #7b2fff;
+      --gold: #ffd60a;
+      --mid: #1a1a24;
       --bg: #070a14;
       --panel: rgba(255,255,255,.06);
-      --panel2: rgba(255,255,255,.09);
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.68);
       --faint: rgba(255,255,255,.50);
       --line: rgba(255,255,255,.12);
       --shadow: 0 24px 70px rgba(0,0,0,.55);
       --radius: 18px;
-      --radius2: 26px;
+      --max: 1160px;
       --a: #7c3aed;
       --b: #22d3ee;
       --c: #34d399;
       --d: #f59e0b;
-      --max: 1160px;
+      --agmodel-green: #34d399;
+      --agmodel-gold: #f59e0b;
       --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
 
@@ -33,9 +39,9 @@
       font-family: var(--font);
       color: var(--text);
       background:
-        radial-gradient(1000px 500px at 20% 0%, rgba(124,58,237,.22), transparent 60%),
-        radial-gradient(900px 500px at 85% 15%, rgba(34,211,238,.14), transparent 55%),
-        radial-gradient(800px 400px at 50% 100%, rgba(52,211,153,.10), transparent 50%),
+        radial-gradient(1000px 500px at 20% 0%, rgba(52,211,153,.15), transparent 60%),
+        radial-gradient(900px 500px at 85% 15%, rgba(245,158,11,.10), transparent 55%),
+        radial-gradient(800px 400px at 50% 100%, rgba(124,58,237,.12), transparent 50%),
         linear-gradient(180deg, #050713 0%, #070a14 45%, #050713 100%);
       overflow-x: hidden;
       min-height: 100vh;
@@ -43,41 +49,6 @@
 
     a { color: inherit; text-decoration: none; }
     .wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
-
-    .nav {
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: blur(14px);
-      background: rgba(7,10,20,.72);
-      border-bottom: 1px solid var(--line);
-    }
-    .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 0; gap: 18px; flex-wrap: wrap;
-    }
-    .brand {
-      display: flex; align-items: center; gap: 10px;
-      font-weight: 750; letter-spacing: .2px;
-    }
-    .brand-mark {
-      width: 34px; height: 34px; border-radius: 12px;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 40%),
-        linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,211,238,.85));
-      box-shadow: 0 14px 32px rgba(124,58,237,.25);
-      border: 1px solid rgba(255,255,255,.14);
-    }
-    .nav-links {
-      display: flex; gap: 8px 16px; flex-wrap: wrap;
-      color: var(--muted); font-weight: 550; font-size: 14px;
-    }
-    .nav-links a {
-      padding: 10px 10px; border-radius: 12px;
-      transition: background .2s ease, color .2s ease;
-    }
-    .nav-links a:hover {
-      background: rgba(255,255,255,.06); color: var(--text);
-    }
-    .nav-cta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
@@ -164,6 +135,18 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
+    .grid-4 {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .grid-2 {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
     .card {
       padding: 22px;
       border-radius: var(--radius2);
@@ -193,12 +176,13 @@
       font-weight: 700;
       letter-spacing: .08em;
       text-transform: uppercase;
-      color: var(--c);
+      color: var(--agmodel-green);
       margin-bottom: 10px;
     }
-    .accent-1 { box-shadow: 0 0 0 1px rgba(124,58,237,.22) inset; }
-    .accent-2 { box-shadow: 0 0 0 1px rgba(34,211,238,.22) inset; }
+    .accent-1 { box-shadow: 0 0 0 1px rgba(52,211,153,.25) inset; }
+    .accent-2 { box-shadow: 0 0 0 1px rgba(245,158,11,.22) inset; }
     .accent-3 { box-shadow: 0 0 0 1px rgba(52,211,153,.20) inset; }
+    .accent-4 { box-shadow: 0 0 0 1px rgba(34,211,238,.18) inset; }
 
     .two-col {
       margin-top: 22px;
@@ -234,30 +218,63 @@
     }
     .panel ul li { margin: 8px 0; }
 
-    .highlight-panel {
-      margin-top: 22px;
-      padding: 28px 26px;
-      border-radius: 30px;
-      border: 1px solid rgba(255,255,255,.14);
-      background:
-        radial-gradient(700px 280px at 15% 0%, rgba(52,211,153,.18), transparent 55%),
-        radial-gradient(600px 240px at 90% 30%, rgba(34,211,238,.10), transparent 50%),
-        rgba(255,255,255,.05);
-      box-shadow: var(--shadow);
-    }
-    .highlight-panel p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 17px;
-      line-height: 1.7;
-      max-width: 72ch;
-    }
-    .highlight-panel .goal {
-      margin-top: 18px;
-      font-size: 19px;
+    .product-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(52,211,153,.35);
+      background: rgba(52,211,153,.08);
+      font-size: 12px;
       font-weight: 700;
-      color: var(--text);
-      line-height: 1.45;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--agmodel-green);
+      margin-bottom: 20px;
+    }
+    .product-wordmark {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(48px, 7vw, 72px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--agmodel-green) 0%, var(--agmodel-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+    .list-block {
+      margin-top: 22px;
+      display: grid;
+      gap: 10px;
+      max-width: 560px;
+    }
+    .list-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.88);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .list-item::before {
+      content: '';
+      flex-shrink: 0;
+      width: 6px; height: 6px; margin-top: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--agmodel-green), var(--agmodel-gold));
+    }
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--agmodel-green);
+      font-weight: 700;
+      margin-bottom: 12px;
     }
 
     .cta-box {
@@ -304,8 +321,8 @@
     .foot a:hover { color: var(--text); }
 
     @media (max-width: 900px) {
-      .grid-3 { grid-template-columns: 1fr; }
-      .two-col { grid-template-columns: 1fr; }
+      .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .grid-2, .two-col { grid-template-columns: 1fr; }
     }
     @media (max-width: 560px) {
       .nav-links { display: none; }
@@ -318,69 +335,136 @@
   </style>
 </head>
 <body>
-  <nav class="nav" aria-label="Primary">
-    <div class="wrap nav-inner">
-      <a class="brand" href="index.html">
-        <span class="brand-mark" aria-hidden="true"></span>
-        Amplified IQ
-      </a>
-      <div class="nav-links">
-        <a href="index.html#hubs">Platform</a>
-        <a href="agmodel.html">AgModel</a>
-        <a href="time-back.html">Time back</a>
-      </div>
-      <div class="nav-cta">
-        <a class="btn primary" href="#contact">Request demo</a>
-      </div>
-    </div>
-  </nav>
-
   <header id="top" class="hero">
     <div class="wrap">
-      <div class="kicker"><span class="dot" aria-hidden="true"></span> An Amplified IQ Product</div>
-      <h1>AgModel: Poultry management from hatch to placement</h1>
+      <div class="product-badge">PRODUCT · AGMODEL</div>
+      <h1 class="product-wordmark">AG Model</h1>
       <p class="lead">
-        A web-based platform helping poultry breeders manage raising chickens from hatch through placement at laying or broiler farms.
-      </p>
-      <p class="lead" style="margin-top: 12px;">
-        Built with AI + human intelligence. Designed for subscription deployment from day one.
+        Breeder flock analytics and forecasting for poultry operations. Move from spreadsheet-driven planning to intelligent production management.
       </p>
       <div class="hero-actions">
-        <a class="btn primary" href="#contact">Request a demo</a>
-        <a class="btn" href="#what">See what it does</a>
+        <a class="btn primary" href="mailto:hello@amplifiediq.ai?subject=AgModel%20Demo">Request a demo</a>
+        <a class="btn" href="index.html#hubs">See the platform</a>
       </div>
       <p class="hero-note">
-        AgModel is the first product built on the Amplified IQ platform. It evolved from a legacy MS Access application into a modern, web-based system ready for multi-customer deployment.
+        AgModel is the first product built on the Amplified IQ platform—proof that the Ignite → Forge → Enable → Amplify process delivers subscription-ready products, not experiments.
       </p>
     </div>
   </header>
 
+  <section id="problem">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The problem</p>
+        <h2>Spreadsheet-driven breeder planning doesn't scale</h2>
+        <p>
+          Most breeder operations run on spreadsheets, tribal knowledge, and manual coordination. Forecasts go stale. Settlements take days. Visibility ends at the farm manager's desk.
+        </p>
+      </div>
+      <div class="list-block">
+        <div class="list-item">Production targets disconnected from actual flock performance</div>
+        <div class="list-item">Manual data entry across farms and complexes</div>
+        <div class="list-item">Settlement calculations error-prone and time-consuming</div>
+        <div class="list-item">No consolidated view across the operation</div>
+        <div class="list-item">Difficult to compare forecasts to actuals</div>
+      </div>
+    </div>
+  </section>
+
   <section id="what">
     <div class="wrap">
       <div class="section-head">
-        <div class="section-title">What AgModel does</div>
-        <h2>Manage the full hatch-to-placement lifecycle</h2>
+        <p class="eyebrow">What AgModel does</p>
+        <h2>Production intelligence for breeder operations</h2>
         <p>
-          AgModel tracks and coordinates every step in raising poultry from day-old chicks through placement at production farms. Built to handle the complexity of modern breeding operations.
+          AgModel brings structure, visibility, and forecasting to breeder flock management. Track flocks from rearing through laying, compare performance to targets, and generate settlements with confidence.
         </p>
       </div>
 
-      <div class="grid-3">
+      <div class="grid-4">
         <article class="card accent-1">
-          <span class="card-tag">Hatch management</span>
-          <h3>Track hatch data and outcomes</h3>
-          <p>Record hatch dates, quantities, genetics, and quality metrics. Know exactly what came from each hatch and where it went.</p>
+          <span class="card-tag">Hierarchy</span>
+          <h3>Company → Complex → Farm → House</h3>
+          <p>Model your full operation structure. Track performance at every level, roll up to executive dashboards.</p>
         </article>
         <article class="card accent-2">
-          <span class="card-tag">Flock tracking</span>
-          <h3>Monitor growth and health</h3>
-          <p>Track weight gain, feed consumption, mortality, and health events across multiple flocks and facilities.</p>
+          <span class="card-tag">Genetics</span>
+          <h3>Breeds & Genetic Lines</h3>
+          <p>Manage genetic line data, track breed performance, maintain accurate production profiles by line.</p>
         </article>
         <article class="card accent-3">
-          <span class="card-tag">Placement coordination</span>
-          <h3>Schedule and execute placement</h3>
-          <p>Coordinate bird readiness, customer orders, transport logistics, and farm capacity for smooth placement operations.</p>
+          <span class="card-tag">Lifecycle</span>
+          <h3>Rearing → Laying</h3>
+          <p>Full flock lifecycle tracking from placement through closeout. Movement history, performance curves, and event timelines.</p>
         </article>
+        <article class="card accent-4">
+          <span class="card-tag">Forecasting</span>
+          <h3>Targets & Projections</h3>
+          <p>Set production targets by house and line. Compare actuals to forecast. See where you're ahead or behind.</p>
+        </article>
+      </div>
+
+      <div class="grid-3" style="margin-top: 14px;">
+        <article class="card accent-1">
+          <span class="card-tag">Dashboards</span>
+          <h3>Flock, Farm, Complex, Executive</h3>
+          <p>Purpose-built dashboards for each operational level. Real-time visibility into what matters at that altitude.</p>
+        </article>
+        <article class="card accent-2">
+          <span class="card-tag">Reports</span>
+          <h3>Settlements & Production Reports</h3>
+          <p>Generate settlement reports with CSV export. Production summaries, variance analysis, and performance tracking.</p>
+        </article>
+        <article class="card accent-3">
+          <span class="card-tag">Data export</span>
+          <h3>CSV Export for Analysis</h3>
+          <p>Export production data, forecasts, and settlements to CSV for deeper analysis or integration with other systems.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How it's built</p>
+        <h2>Built the Amplified IQ way</h2>
+        <p>
+          AgModel is living proof of the Ignite → Forge → Enable → Amplify process. We didn't just rebuild an old Access app. We used the full AmpIQ method to create a modern, subscription-ready platform.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3>🔥 Ignite: Discovery & scoping</h3>
+          <p>
+            Started with poultry operators who knew the pain. Mapped workflows, identified core jobs, estimated effort, phased the build. Clear requirements before a line of code.
+          </p>
+        </div>
+        <div class="panel">
+          <h3>🔨 Forge: AI-accelerated build</h3>
+          <p>
+            Human developers + AI partners built faster and cleaner. Modern web stack (MS SQL backend), role-based access, multi-tenant architecture from day one.
+          </p>
+        </div>
+        <div class="panel">
+          <h3>🛡️ Enable: Deploy & support</h3>
+          <p>
+            Deployed to Azure with monitoring, backup, and rollout support. Training materials, onboarding flows, and feedback loops built into the process.
+          </p>
+        </div>
+        <div class="panel">
+          <h3>📣 Amplify: Scale & iterate</h3>
+          <p>
+            Early customers validate workflows. Usage data informs next iterations. Platform ready to scale from one operation to many without rebuilding.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top: 22px; padding: 28px 26px; border-radius: 30px; border: 1px solid rgba(52,211,153,.25); background: radial-gradient(700px 280px at 15% 0%, rgba(52,211,153,.12), transparent 55%), rgba(255,255,255,.05);">
+        <p style="margin: 0; color: var(--muted); font-size: 17px; line-height: 1.7;">
+          AgModel proves the model works: a legacy MS Access app became a modern, multi-tenant SaaS platform in weeks, not years—because we paired experienced humans with AI and followed a disciplined process.
+        </p>
       </div>
     </div>
   </section>
@@ -388,119 +472,54 @@
   <section id="who">
     <div class="wrap">
       <div class="section-head">
-        <div class="section-title">Who it's for</div>
-        <h2>Built for poultry breeding operations</h2>
+        <p class="eyebrow">Who it's for</p>
+        <h2>Built for breeder operations and complexes</h2>
         <p>
-          AgModel is designed for poultry breeders and integrators managing hatch-to-placement operations—whether raising birds for laying hen production or broiler placement.
+          AgModel is designed for poultry breeder operations managing multiple farms, flocks, and genetic lines. If you're coordinating rearing and laying operations across houses and complexes, AgModel gives you the structure and visibility to make better decisions.
         </p>
       </div>
 
       <div class="two-col">
         <div class="panel">
-          <h3>For breeding operations</h3>
-          <p>
-            If you're managing day-old chicks through grow-out and placement, AgModel gives you centralized visibility and coordination across your operation.
-          </p>
-          <ul>
-            <li>Track multiple hatches and flocks simultaneously</li>
-            <li>Coordinate placement schedules with customer demand</li>
-            <li>Monitor growth performance and feed efficiency</li>
-            <li>Manage health events and interventions</li>
-            <li>Generate reports for internal and customer visibility</li>
+          <h3>Breeder operations</h3>
+          <ul style="margin-top: 12px;">
+            <li>Multi-farm or complex operations</li>
+            <li>Managing multiple genetic lines</li>
+            <li>Tracking rearing and laying phases</li>
+            <li>Forecasting production and settlements</li>
+            <li>Coordinating movement and closeouts</li>
           </ul>
         </div>
-
         <div class="panel">
-          <h3>For integrators and partners</h3>
-          <p>
-            AgModel helps bridge breeding operations with downstream customers—laying farms, broiler farms, and integrated production systems.
-          </p>
-          <ul>
-            <li>Visibility into bird availability and readiness</li>
-            <li>Clear placement schedules and logistics coordination</li>
-            <li>Quality and performance data for decision-making</li>
-            <li>Shared accountability across the supply chain</li>
-            <li>Subscription-ready for multi-site deployment</li>
+          <h3>Operations leaders</h3>
+          <ul style="margin-top: 12px;">
+            <li>Farm managers needing house-level detail</li>
+            <li>Complex managers rolling up performance</li>
+            <li>Executives wanting consolidated dashboards</li>
+            <li>Analysts generating settlement reports</li>
+            <li>Teams ready to move off spreadsheets</li>
           </ul>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section id="why-ampiq">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="section-title">Why Amplified IQ</div>
-        <h2>Built the Amplified IQ way</h2>
-        <p>
-          AgModel is the first product developed through the Amplified IQ process: Ignite (discovery), Forge (build with PLG), Enable (deploy and support), and Amplify (scale adoption).
-        </p>
-      </div>
-
-      <div class="highlight-panel">
-        <p>
-          We didn't just migrate an MS Access app. We rebuilt it as a modern, web-based platform with subscription deployment in mind from the start.
-        </p>
-        <p class="goal">
-          Human expertise + AI acceleration = products built faster, designed smarter, and ready for multi-customer scale.
-        </p>
-      </div>
-
-      <div class="two-col" style="margin-top: 22px;">
-        <div class="panel">
-          <h3>Built with AI + human intelligence</h3>
-          <p>
-            AgModel was built using the Amplified IQ hybrid model: experienced developers and domain experts working alongside AI to accelerate research, prototyping, and delivery.
-          </p>
-          <p>
-            The result: faster time to value, cleaner architecture, and better documentation for long-term support and iteration.
-          </p>
-        </div>
-
-        <div class="panel">
-          <h3>Subscription-ready from day one</h3>
-          <p>
-            AgModel was architected with multi-customer deployment in mind: isolated data, role-based access, usage instrumentation, and billing hooks built into the foundation.
-          </p>
-          <p>
-            It's ready to scale from one customer to many—without rebuilding the core platform.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="status">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="section-title">Early adopters</div>
-        <h2>Built with real poultry operators</h2>
-        <p>
-          AgModel was developed in partnership with poultry breeding professionals who understand the hatch-to-placement process. It's being evaluated by operations in North America and the Caribbean.
-        </p>
-      </div>
-
-      <div class="highlight-panel">
-        <p>
-          We're working with early customers to validate the platform, refine workflows, and prove the value before scaling to broader adoption.
-        </p>
-        <p class="goal">
-          If you're running a poultry breeding operation and interested in modern tooling designed for subscription deployment, let's talk.
+      <div class="panel" style="margin-top: 22px; padding: 28px 26px; border-radius: 30px; border: 1px solid rgba(245,158,11,.25); background: radial-gradient(600px 240px at 90% 30%, rgba(245,158,11,.10), transparent 50%), rgba(255,255,255,.05);">
+        <p style="margin: 0; color: var(--muted); font-size: 17px; line-height: 1.7; max-width: 72ch;">
+          AgModel was built in partnership with breeder professionals who understand the complexity of coordinating flocks, genetics, and production targets. It's being evaluated by operations in North America and the Caribbean.
         </p>
       </div>
     </div>
   </section>
 
-  <section id="contact" style="padding-top: 20px;">
+  <section id="contact" style="padding: 48px 0 64px;">
     <div class="wrap">
       <div class="cta-box">
         <div class="cta-inner">
           <h2>Ready to see AgModel in action?</h2>
           <p>
-            Whether you're evaluating new systems for your operation or looking for a partner to help you modernize legacy tooling, we'd be glad to walk you through AgModel and the Amplified IQ approach.
+            If you're running a breeder operation and ready to move from spreadsheets to intelligent production management, let's talk. We'll walk you through AgModel and show you how the Amplified IQ process creates products like this.
           </p>
           <div class="cta-actions">
-            <a class="btn primary" href="mailto:hello@amplifiediq.ai?subject=AgModel%20Demo%20Request">Request a demo</a>
+            <a class="btn primary" href="mailto:hello@amplifiediq.ai?subject=AgModel%20Demo">Request a demo</a>
             <a class="btn" href="index.html">Learn about Amplified IQ</a>
           </div>
         </div>
@@ -512,7 +531,7 @@
     <div class="wrap">
       <div class="foot">
         <div style="display: flex; align-items: center; gap: 10px;">
-          <span class="brand-mark" aria-hidden="true" style="width: 22px; height: 22px; border-radius: 10px;"></span>
+          <span style="width: 22px; height: 22px; border-radius: 10px; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 40%), linear-gradient(135deg, rgba(52,211,153,.95), rgba(245,158,11,.85)); box-shadow: 0 8px 20px rgba(52,211,153,.2); border: 1px solid rgba(255,255,255,.14);" aria-hidden="true"></span>
           <span>© <span id="y"></span> AmplifiedIQ.ai</span>
         </div>
         <div style="display: flex; gap: 14px; flex-wrap: wrap;">
