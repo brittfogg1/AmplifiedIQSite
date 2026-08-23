@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AgModel | Breeder Flock Analytics & Forecasting | Amplified IQ</title>
+  <meta name="description" content="AgModel: Breeder flock analytics and forecasting built on the Amplified IQ platform. Move from spreadsheet-driven planning to intelligent production management." />
+  <meta name="theme-color" content="#070a14" />
+  <style>
+    :root {
+      --black: #08080a;
+      --white: #f2f0eb;
+      --cyan: #00f5d4;
+      --electric: #7b2fff;
+      --gold: #ffd60a;
+      --mid: #1a1a24;
+      --bg: #070a14;
+      --panel: rgba(255,255,255,.06);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --faint: rgba(255,255,255,.50);
+      --line: rgba(255,255,255,.12);
+      --shadow: 0 24px 70px rgba(0,0,0,.55);
+      --radius: 18px;
+      --max: 1160px;
+      --a: #7c3aed;
+      --b: #22d3ee;
+      --c: #34d399;
+      --d: #f59e0b;
+      --agmodel-green: #34d399;
+      --agmodel-gold: #f59e0b;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(1000px 500px at 20% 0%, rgba(52,211,153,.15), transparent 60%),
+        radial-gradient(900px 500px at 85% 15%, rgba(245,158,11,.10), transparent 55%),
+        radial-gradient(800px 400px at 50% 100%, rgba(124,58,237,.12), transparent 50%),
+        linear-gradient(180deg, #050713 0%, #070a14 45%, #050713 100%);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px; padding: 11px 18px; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text); font-weight: 650; font-size: 14px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.32);
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      cursor: pointer; font-family: inherit;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.22);
+    }
+    .btn.primary {
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,211,238,.85));
+      border-color: rgba(255,255,255,.18);
+    }
+    .btn.primary:hover {
+      background: linear-gradient(135deg, rgba(124,58,237,1), rgba(34,211,238,.95));
+    }
+
+    .hero {
+      padding: 48px 0 56px;
+      position: relative;
+    }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 14px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--muted); font-weight: 650; font-size: 13px;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--a), var(--b));
+      box-shadow: 0 0 0 6px rgba(124,58,237,.12);
+    }
+    h1 {
+      margin: 18px 0 0;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.06;
+      letter-spacing: -1px;
+      max-width: 18ch;
+    }
+    .lead {
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: clamp(17px, 2.1vw, 20px);
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+    .hero-actions { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-note {
+      margin-top: 22px; color: var(--faint); font-size: 15px;
+      line-height: 1.65; max-width: 58ch;
+    }
+
+    section { padding: 40px 0; }
+    .section-title {
+      font-size: 12px; color: var(--muted);
+      letter-spacing: .2em; text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(26px, 3.2vw, 38px);
+      letter-spacing: -.5px;
+      line-height: 1.15;
+    }
+    .section-head p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.65;
+      max-width: 68ch;
+    }
+
+    .grid-3 {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .grid-4 {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .grid-2 {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .card {
+      padding: 22px;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      transition: transform .15s ease, border-color .2s ease, background .2s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+    }
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+      letter-spacing: -.2px;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .card-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--agmodel-green);
+      margin-bottom: 10px;
+    }
+    .accent-1 { box-shadow: 0 0 0 1px rgba(52,211,153,.25) inset; }
+    .accent-2 { box-shadow: 0 0 0 1px rgba(245,158,11,.22) inset; }
+    .accent-3 { box-shadow: 0 0 0 1px rgba(52,211,153,.20) inset; }
+    .accent-4 { box-shadow: 0 0 0 1px rgba(34,211,238,.18) inset; }
+
+    .two-col {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .panel {
+      padding: 24px;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+    }
+    .panel h3 {
+      margin: 0 0 10px;
+      font-size: 19px;
+      letter-spacing: -.3px;
+    }
+    .panel p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    .panel p:last-child { margin-bottom: 0; }
+    .panel ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .panel ul li { margin: 8px 0; }
+
+    .product-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(52,211,153,.35);
+      background: rgba(52,211,153,.08);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--agmodel-green);
+      margin-bottom: 20px;
+    }
+    .product-wordmark {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(48px, 7vw, 72px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--agmodel-green) 0%, var(--agmodel-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+    .list-block {
+      margin-top: 22px;
+      display: grid;
+      gap: 10px;
+      max-width: 560px;
+    }
+    .list-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.88);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .list-item::before {
+      content: '';
+      flex-shrink: 0;
+      width: 6px; height: 6px; margin-top: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--agmodel-green), var(--agmodel-gold));
+    }
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--agmodel-green);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .cta-box {
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(900px 320px at 20% 20%, rgba(124,58,237,.28), transparent 60%),
+        radial-gradient(900px 320px at 85% 35%, rgba(34,211,238,.18), transparent 55%),
+        rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .cta-inner {
+      padding: 28px 24px;
+    }
+    .cta-inner h2 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 34px);
+      letter-spacing: -.4px;
+      line-height: 1.15;
+    }
+    .cta-inner > p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+      max-width: 65ch;
+    }
+    .cta-actions { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 22px 0 32px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .foot a:hover { color: var(--text); }
+
+    @media (max-width: 900px) {
+      .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .grid-2, .two-col { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .nav-links { display: none; }
+      .btn { width: 100%; justify-content: center; }
+      .nav-cta .btn { width: auto; flex: 1; min-width: 140px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <header id="top" class="hero">
+    <div class="wrap">
+      <div class="product-badge">PRODUCT · AGMODEL</div>
+      <h1 class="product-wordmark">AG Model</h1>
+      <p class="lead">
+        Breeder flock analytics and forecasting for poultry operations. Move from spreadsheet-driven planning to intelligent production management.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="mailto:hello@amplifiediq.ai?subject=AgModel%20Demo">Request a demo</a>
+        <a class="btn" href="index.html#hubs">See the platform</a>
+      </div>
+      <p class="hero-note">
+        AgModel is the first product built on the Amplified IQ platform—proof that the Ignite → Forge → Enable → Amplify process delivers subscription-ready products, not experiments.
+      </p>
+    </div>
+  </header>
+
+  <section id="problem">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The problem</p>
+        <h2>Spreadsheet-driven breeder planning doesn't scale</h2>
+        <p>
+          Most breeder operations run on spreadsheets, tribal knowledge, and manual coordination. Forecasts go stale. Settlements take days. Visibility ends at the farm manager's desk.
+        </p>
+      </div>
+      <div class="list-block">
+        <div class="list-item">Production targets disconnected from actual flock performance</div>
+        <div class="list-item">Manual data entry across farms and complexes</div>
+        <div class="list-item">Settlement calculations error-prone and time-consuming</div>
+        <div class="list-item">No consolidated view across the operation</div>
+        <div class="list-item">Difficult to compare forecasts to actuals</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="what">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What AgModel does</p>
+        <h2>Production intelligence for breeder operations</h2>
+        <p>
+          AgModel brings structure, visibility, and forecasting to breeder flock management. Track flocks from rearing through laying, compare performance to targets, and generate settlements with confidence.
+        </p>
+      </div>
+
+      <div class="grid-4">
+        <article class="card accent-1">
+          <span class="card-tag">Hierarchy</span>
+          <h3>Company → Complex → Farm → House</h3>
+          <p>Model your full operation structure. Track performance at every level, roll up to executive dashboards.</p>
+        </article>
+        <article class="card accent-2">
+          <span class="card-tag">Genetics</span>
+          <h3>Breeds & Genetic Lines</h3>
+          <p>Manage genetic line data, track breed performance, maintain accurate production profiles by line.</p>
+        </article>
+        <article class="card accent-3">
+          <span class="card-tag">Lifecycle</span>
+          <h3>Rearing → Laying</h3>
+          <p>Full flock lifecycle tracking from placement through closeout. Movement history, performance curves, and event timelines.</p>
+        </article>
+        <article class="card accent-4">
+          <span class="card-tag">Forecasting</span>
+          <h3>Targets & Projections</h3>
+          <p>Set production targets by house and line. Compare actuals to forecast. See where you're ahead or behind.</p>
+        </article>
+      </div>
+
+      <div class="grid-3" style="margin-top: 14px;">
+        <article class="card accent-1">
+          <span class="card-tag">Dashboards</span>
+          <h3>Flock, Farm, Complex, Executive</h3>
+          <p>Purpose-built dashboards for each operational level. Real-time visibility into what matters at that altitude.</p>
+        </article>
+        <article class="card accent-2">
+          <span class="card-tag">Reports</span>
+          <h3>Settlements & Production Reports</h3>
+          <p>Generate settlement reports with CSV export. Production summaries, variance analysis, and performance tracking.</p>
+        </article>
+        <article class="card accent-3">
+          <span class="card-tag">Data export</span>
+          <h3>CSV Export for Analysis</h3>
+          <p>Export production data, forecasts, and settlements to CSV for deeper analysis or integration with other systems.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How it's built</p>
+        <h2>Built the Amplified IQ way</h2>
+        <p>
+          AgModel is living proof of the Ignite → Forge → Enable → Amplify process. We didn't just rebuild an old Access app. We used the full AmpIQ method to create a modern, subscription-ready platform.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3>🔥 Ignite: Discovery & scoping</h3>
+          <p>
+            Started with poultry operators who knew the pain. Mapped workflows, identified core jobs, estimated effort, phased the build. Clear requirements before a line of code.
+          </p>
+        </div>
+        <div class="panel">
+          <h3>🔨 Forge: AI-accelerated build</h3>
+          <p>
+            Human developers + AI partners built faster and cleaner. Modern web stack (MS SQL backend), role-based access, multi-tenant architecture from day one.
+          </p>
+        </div>
+        <div class="panel">
+          <h3>🛡️ Enable: Deploy & support</h3>
+          <p>
+            Deployed to Azure with monitoring, backup, and rollout support. Training materials, onboarding flows, and feedback loops built into the process.
+          </p>
+        </div>
+        <div class="panel">
+          <h3>📣 Amplify: Scale & iterate</h3>
+          <p>
+            Early customers validate workflows. Usage data informs next iterations. Platform ready to scale from one operation to many without rebuilding.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top: 22px; padding: 28px 26px; border-radius: 30px; border: 1px solid rgba(52,211,153,.25); background: radial-gradient(700px 280px at 15% 0%, rgba(52,211,153,.12), transparent 55%), rgba(255,255,255,.05);">
+        <p style="margin: 0; color: var(--muted); font-size: 17px; line-height: 1.7;">
+          AgModel proves the model works: a legacy MS Access app became a modern, multi-tenant SaaS platform in weeks, not years—because we paired experienced humans with AI and followed a disciplined process.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Who it's for</p>
+        <h2>Built for breeder operations and complexes</h2>
+        <p>
+          AgModel is designed for poultry breeder operations managing multiple farms, flocks, and genetic lines. If you're coordinating rearing and laying operations across houses and complexes, AgModel gives you the structure and visibility to make better decisions.
+        </p>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <h3>Breeder operations</h3>
+          <ul style="margin-top: 12px;">
+            <li>Multi-farm or complex operations</li>
+            <li>Managing multiple genetic lines</li>
+            <li>Tracking rearing and laying phases</li>
+            <li>Forecasting production and settlements</li>
+            <li>Coordinating movement and closeouts</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Operations leaders</h3>
+          <ul style="margin-top: 12px;">
+            <li>Farm managers needing house-level detail</li>
+            <li>Complex managers rolling up performance</li>
+            <li>Executives wanting consolidated dashboards</li>
+            <li>Analysts generating settlement reports</li>
+            <li>Teams ready to move off spreadsheets</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top: 22px; padding: 28px 26px; border-radius: 30px; border: 1px solid rgba(245,158,11,.25); background: radial-gradient(600px 240px at 90% 30%, rgba(245,158,11,.10), transparent 50%), rgba(255,255,255,.05);">
+        <p style="margin: 0; color: var(--muted); font-size: 17px; line-height: 1.7; max-width: 72ch;">
+          AgModel was built in partnership with breeder professionals who understand the complexity of coordinating flocks, genetics, and production targets. It's being evaluated by operations in North America and the Caribbean.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding: 48px 0 64px;">
+    <div class="wrap">
+      <div class="cta-box">
+        <div class="cta-inner">
+          <h2>Ready to see AgModel in action?</h2>
+          <p>
+            If you're running a breeder operation and ready to move from spreadsheets to intelligent production management, let's talk. We'll walk you through AgModel and show you how the Amplified IQ process creates products like this.
+          </p>
+          <div class="cta-actions">
+            <a class="btn primary" href="mailto:hello@amplifiediq.ai?subject=AgModel%20Demo">Request a demo</a>
+            <a class="btn" href="index.html">Learn about Amplified IQ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="width: 22px; height: 22px; border-radius: 10px; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 40%), linear-gradient(135deg, rgba(52,211,153,.95), rgba(245,158,11,.85)); box-shadow: 0 8px 20px rgba(52,211,153,.2); border: 1px solid rgba(255,255,255,.14);" aria-hidden="true"></span>
+          <span>© <span id="y"></span> AmplifiedIQ.ai</span>
+        </div>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+          <a href="index.html">Home</a>
+          <a href="agmodel.html">AgModel</a>
+          <a href="time-back.html">Time back</a>
+          <a href="mailto:hello@amplifiediq.ai">hello@amplifiediq.ai</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var id = a.getAttribute('href');
+      if (!id || id === '#') return;
+      var el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.pushState(null, '', id);
+    });
+  </script>
+</body>
+</html>
