@@ -588,6 +588,15 @@
       background: rgba(255,255,255,.06);
       color: var(--text);
     }
+    .nav-products{
+      display:flex; gap: 8px; align-items: center;
+    }
+    .nav-products::before{
+      content: '';
+      width: 1px; height: 16px;
+      background: rgba(255,255,255,.14);
+      margin: 0 4px;
+    }
     .nav-cta{
       display:flex; align-items:center; gap: 10px;
     }
@@ -972,6 +981,11 @@
   <!-- HERO -->
   <header id="top" class="hero">
     <div class="wrap">
+      <nav style="max-width: 1100px; margin: 0 auto 40px; display: flex; gap: 12px; flex-wrap: wrap;">
+        <a class="btn" href="#hubs" style="padding: 9px 16px;">The platform</a>
+        <a class="btn" href="agmodel.html" style="padding: 9px 16px;">AgModel</a>
+        <a class="btn" href="time-back.html" style="padding: 9px 16px;">Time back</a>
+      </nav>
       <div class="hero-grid">
         <div>
           <div class="kicker"><span class="dot" aria-hidden="true"></span> Human creativity. AI amplified.</div>
@@ -1352,6 +1366,7 @@
           <a href="#model">Model</a>
           <a href="#hubs">Hubs</a>
           <a href="#loop">Loop</a>
+          <a href="agmodel.html">AgModel</a>
           <a href="time-back.html">Time back</a>
           <a href="mailto:hello@amplifiediq.ai">hello@amplifiediq.ai</a>
         </div>

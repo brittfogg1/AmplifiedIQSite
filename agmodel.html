@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AgModel | Poultry Management Platform | Amplified IQ</title>
+  <meta name="description" content="AgModel helps poultry breeders manage raising chickens from hatch through placement at laying or broiler farms. Built with AI + human intelligence for subscription deployment." />
+  <meta name="theme-color" content="#070a14" />
+  <style>
+    :root {
+      --bg: #070a14;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.09);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --faint: rgba(255,255,255,.50);
+      --line: rgba(255,255,255,.12);
+      --shadow: 0 24px 70px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 26px;
+      --a: #7c3aed;
+      --b: #22d3ee;
+      --c: #34d399;
+      --d: #f59e0b;
+      --max: 1160px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(1000px 500px at 20% 0%, rgba(124,58,237,.22), transparent 60%),
+        radial-gradient(900px 500px at 85% 15%, rgba(34,211,238,.14), transparent 55%),
+        radial-gradient(800px 400px at 50% 100%, rgba(52,211,153,.10), transparent 50%),
+        linear-gradient(180deg, #050713 0%, #070a14 45%, #050713 100%);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,10,20,.72);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; gap: 18px; flex-wrap: wrap;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 750; letter-spacing: .2px;
+    }
+    .brand-mark {
+      width: 34px; height: 34px; border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 40%),
+        linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,211,238,.85));
+      box-shadow: 0 14px 32px rgba(124,58,237,.25);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .nav-links {
+      display: flex; gap: 8px 16px; flex-wrap: wrap;
+      color: var(--muted); font-weight: 550; font-size: 14px;
+    }
+    .nav-links a {
+      padding: 10px 10px; border-radius: 12px;
+      transition: background .2s ease, color .2s ease;
+    }
+    .nav-links a:hover {
+      background: rgba(255,255,255,.06); color: var(--text);
+    }
+    .nav-cta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px; padding: 11px 18px; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text); font-weight: 650; font-size: 14px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.32);
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      cursor: pointer; font-family: inherit;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.22);
+    }
+    .btn.primary {
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,211,238,.85));
+      border-color: rgba(255,255,255,.18);
+    }
+    .btn.primary:hover {
+      background: linear-gradient(135deg, rgba(124,58,237,1), rgba(34,211,238,.95));
+    }
+
+    .hero {
+      padding: 48px 0 56px;
+      position: relative;
+    }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 14px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--muted); font-weight: 650; font-size: 13px;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--a), var(--b));
+      box-shadow: 0 0 0 6px rgba(124,58,237,.12);
+    }
+    h1 {
+      margin: 18px 0 0;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.06;
+      letter-spacing: -1px;
+      max-width: 18ch;
+    }
+    .lead {
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: clamp(17px, 2.1vw, 20px);
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+    .hero-actions { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-note {
+      margin-top: 22px; color: var(--faint); font-size: 15px;
+      line-height: 1.65; max-width: 58ch;
+    }
+
+    section { padding: 40px 0; }
+    .section-title {
+      font-size: 12px; color: var(--muted);
+      letter-spacing: .2em; text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(26px, 3.2vw, 38px);
+      letter-spacing: -.5px;
+      line-height: 1.15;
+    }
+    .section-head p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.65;
+      max-width: 68ch;
+    }
+
+    .grid-3 {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .card {
+      padding: 22px;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      transition: transform .15s ease, border-color .2s ease, background .2s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+    }
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+      letter-spacing: -.2px;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .card-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--c);
+      margin-bottom: 10px;
+    }
+    .accent-1 { box-shadow: 0 0 0 1px rgba(124,58,237,.22) inset; }
+    .accent-2 { box-shadow: 0 0 0 1px rgba(34,211,238,.22) inset; }
+    .accent-3 { box-shadow: 0 0 0 1px rgba(52,211,153,.20) inset; }
+
+    .two-col {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .panel {
+      padding: 24px;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+    }
+    .panel h3 {
+      margin: 0 0 10px;
+      font-size: 19px;
+      letter-spacing: -.3px;
+    }
+    .panel p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    .panel p:last-child { margin-bottom: 0; }
+    .panel ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .panel ul li { margin: 8px 0; }
+
+    .highlight-panel {
+      margin-top: 22px;
+      padding: 28px 26px;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(700px 280px at 15% 0%, rgba(52,211,153,.18), transparent 55%),
+        radial-gradient(600px 240px at 90% 30%, rgba(34,211,238,.10), transparent 50%),
+        rgba(255,255,255,.05);
+      box-shadow: var(--shadow);
+    }
+    .highlight-panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+      max-width: 72ch;
+    }
+    .highlight-panel .goal {
+      margin-top: 18px;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .cta-box {
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(900px 320px at 20% 20%, rgba(124,58,237,.28), transparent 60%),
+        radial-gradient(900px 320px at 85% 35%, rgba(34,211,238,.18), transparent 55%),
+        rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .cta-inner {
+      padding: 28px 24px;
+    }
+    .cta-inner h2 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 34px);
+      letter-spacing: -.4px;
+      line-height: 1.15;
+    }
+    .cta-inner > p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+      max-width: 65ch;
+    }
+    .cta-actions { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 22px 0 32px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .foot a:hover { color: var(--text); }
+
+    @media (max-width: 900px) {
+      .grid-3 { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .nav-links { display: none; }
+      .btn { width: 100%; justify-content: center; }
+      .nav-cta .btn { width: auto; flex: 1; min-width: 140px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Primary">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Amplified IQ
+      </a>
+      <div class="nav-links">
+        <a href="index.html#hubs">Platform</a>
+        <a href="agmodel.html">AgModel</a>
+        <a href="time-back.html">Time back</a>
+      </div>
+      <div class="nav-cta">
+        <a class="btn primary" href="#contact">Request demo</a>
+      </div>
+    </div>
+  </nav>
+
+  <header id="top" class="hero">
+    <div class="wrap">
+      <div class="kicker"><span class="dot" aria-hidden="true"></span> An Amplified IQ Product</div>
+      <h1>AgModel: Poultry management from hatch to placement</h1>
+      <p class="lead">
+        A web-based platform helping poultry breeders manage raising chickens from hatch through placement at laying or broiler farms.
+      </p>
+      <p class="lead" style="margin-top: 12px;">
+        Built with AI + human intelligence. Designed for subscription deployment from day one.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#contact">Request a demo</a>
+        <a class="btn" href="#what">See what it does</a>
+      </div>
+      <p class="hero-note">
+        AgModel is the first product built on the Amplified IQ platform. It evolved from a legacy MS Access application into a modern, web-based system ready for multi-customer deployment.
+      </p>
+    </div>
+  </header>
+
+  <section id="what">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-title">What AgModel does</div>
+        <h2>Manage the full hatch-to-placement lifecycle</h2>
+        <p>
+          AgModel tracks and coordinates every step in raising poultry from day-old chicks through placement at production farms. Built to handle the complexity of modern breeding operations.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card accent-1">
+          <span class="card-tag">Hatch management</span>
+          <h3>Track hatch data and outcomes</h3>
+          <p>Record hatch dates, quantities, genetics, and quality metrics. Know exactly what came from each hatch and where it went.</p>
+        </article>
+        <article class="card accent-2">
+          <span class="card-tag">Flock tracking</span>
+          <h3>Monitor growth and health</h3>
+          <p>Track weight gain, feed consumption, mortality, and health events across multiple flocks and facilities.</p>
+        </article>
+        <article class="card accent-3">
+          <span class="card-tag">Placement coordination</span>
+          <h3>Schedule and execute placement</h3>
+          <p>Coordinate bird readiness, customer orders, transport logistics, and farm capacity for smooth placement operations.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="who">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-title">Who it's for</div>
+        <h2>Built for poultry breeding operations</h2>
+        <p>
+          AgModel is designed for poultry breeders and integrators managing hatch-to-placement operations—whether raising birds for laying hen production or broiler placement.
+        </p>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <h3>For breeding operations</h3>
+          <p>
+            If you're managing day-old chicks through grow-out and placement, AgModel gives you centralized visibility and coordination across your operation.
+          </p>
+          <ul>
+            <li>Track multiple hatches and flocks simultaneously</li>
+            <li>Coordinate placement schedules with customer demand</li>
+            <li>Monitor growth performance and feed efficiency</li>
+            <li>Manage health events and interventions</li>
+            <li>Generate reports for internal and customer visibility</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h3>For integrators and partners</h3>
+          <p>
+            AgModel helps bridge breeding operations with downstream customers—laying farms, broiler farms, and integrated production systems.
+          </p>
+          <ul>
+            <li>Visibility into bird availability and readiness</li>
+            <li>Clear placement schedules and logistics coordination</li>
+            <li>Quality and performance data for decision-making</li>
+            <li>Shared accountability across the supply chain</li>
+            <li>Subscription-ready for multi-site deployment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why-ampiq">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-title">Why Amplified IQ</div>
+        <h2>Built the Amplified IQ way</h2>
+        <p>
+          AgModel is the first product developed through the Amplified IQ process: Ignite (discovery), Forge (build with PLG), Enable (deploy and support), and Amplify (scale adoption).
+        </p>
+      </div>
+
+      <div class="highlight-panel">
+        <p>
+          We didn't just migrate an MS Access app. We rebuilt it as a modern, web-based platform with subscription deployment in mind from the start.
+        </p>
+        <p class="goal">
+          Human expertise + AI acceleration = products built faster, designed smarter, and ready for multi-customer scale.
+        </p>
+      </div>
+
+      <div class="two-col" style="margin-top: 22px;">
+        <div class="panel">
+          <h3>Built with AI + human intelligence</h3>
+          <p>
+            AgModel was built using the Amplified IQ hybrid model: experienced developers and domain experts working alongside AI to accelerate research, prototyping, and delivery.
+          </p>
+          <p>
+            The result: faster time to value, cleaner architecture, and better documentation for long-term support and iteration.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h3>Subscription-ready from day one</h3>
+          <p>
+            AgModel was architected with multi-customer deployment in mind: isolated data, role-based access, usage instrumentation, and billing hooks built into the foundation.
+          </p>
+          <p>
+            It's ready to scale from one customer to many—without rebuilding the core platform.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="status">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="section-title">Early adopters</div>
+        <h2>Built with real poultry operators</h2>
+        <p>
+          AgModel was developed in partnership with poultry breeding professionals who understand the hatch-to-placement process. It's being evaluated by operations in North America and the Caribbean.
+        </p>
+      </div>
+
+      <div class="highlight-panel">
+        <p>
+          We're working with early customers to validate the platform, refine workflows, and prove the value before scaling to broader adoption.
+        </p>
+        <p class="goal">
+          If you're running a poultry breeding operation and interested in modern tooling designed for subscription deployment, let's talk.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding-top: 20px;">
+    <div class="wrap">
+      <div class="cta-box">
+        <div class="cta-inner">
+          <h2>Ready to see AgModel in action?</h2>
+          <p>
+            Whether you're evaluating new systems for your operation or looking for a partner to help you modernize legacy tooling, we'd be glad to walk you through AgModel and the Amplified IQ approach.
+          </p>
+          <div class="cta-actions">
+            <a class="btn primary" href="mailto:hello@amplifiediq.ai?subject=AgModel%20Demo%20Request">Request a demo</a>
+            <a class="btn" href="index.html">Learn about Amplified IQ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="brand-mark" aria-hidden="true" style="width: 22px; height: 22px; border-radius: 10px;"></span>
+          <span>© <span id="y"></span> AmplifiedIQ.ai</span>
+        </div>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+          <a href="index.html">Home</a>
+          <a href="agmodel.html">AgModel</a>
+          <a href="time-back.html">Time back</a>
+          <a href="mailto:hello@amplifiediq.ai">hello@amplifiediq.ai</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var id = a.getAttribute('href');
+      if (!id || id === '#') return;
+      var el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.pushState(null, '', id);
+    });
+  </script>
+</body>
+</html>
