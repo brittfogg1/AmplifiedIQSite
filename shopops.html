@@ -559,16 +559,24 @@
     document.getElementById('y').textContent = new Date().getFullYear();
 
     document.addEventListener('click', function (e) {
-      var a = e.target.closest('a[href^="#"]');
+      var a = e.target.closest('a[href]');
       if (!a) return;
-      var id = a.getAttribute('href');
-      if (!id || id === '#') return;
-      var el = document.querySelector(id);
+      var href = a.getAttribute('href') || '';
+
+      if (/^mailto:/i.test(href)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        window.location.href = href;
+        return;
+      }
+
+      if (href.charAt(0) !== '#' || href === '#') return;
+      var el = document.getElementById(href.slice(1));
       if (!el) return;
       e.preventDefault();
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      history.pushState(null, '', id);
-    });
+      history.pushState(null, '', href);
+    }, true);
   </script>
 </body>
 </html>

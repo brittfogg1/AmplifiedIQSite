@@ -48,6 +48,7 @@
         linear-gradient(90deg, rgba(0,245,212,0.05) 1px, transparent 1px);
       background-size: 60px 60px;
       animation: gridShift 20s linear infinite;
+      pointer-events: none;
     }
   
     @keyframes gridShift {
@@ -1482,18 +1483,26 @@
     // tiny enhancement: current year + smooth anchors
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // Smooth scrolling for in-page anchors
+    // Open mailto in the OS mail client, and smooth-scroll in-page anchors
     document.addEventListener("click", (e) => {
-      const a = e.target.closest("a[href^='#']");
+      const a = e.target.closest("a[href]");
       if (!a) return;
-      const id = a.getAttribute("href");
-      if (!id || id === "#") return;
-      const el = document.querySelector(id);
+      const href = a.getAttribute("href") || "";
+
+      if (/^mailto:/i.test(href)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        window.location.href = href;
+        return;
+      }
+
+      if (href.charAt(0) !== "#" || href === "#") return;
+      const el = document.getElementById(href.slice(1));
       if (!el) return;
       e.preventDefault();
       el.scrollIntoView({ behavior: "smooth", block: "start" });
-      history.pushState(null, "", id);
-    });
+      history.pushState(null, "", href);
+    }, true);
   </script>
 </body>
 </html>
