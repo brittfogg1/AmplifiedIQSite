@@ -37,6 +37,12 @@
       padding: 60px 40px;
       overflow: hidden;
     }
+
+    section.hero {
+      min-height: 0;
+      justify-content: flex-start;
+      padding: 16px 24px 36px;
+    }
   
     /* animated grid bg */
     .hero::before {
@@ -89,6 +95,18 @@
       position: relative;
       width: 140px;
       height: 140px;
+    }
+
+    .loop-visual {
+      position: relative;
+      width: min(580px, 92vw);
+      background: transparent;
+    }
+
+    .loop-visual img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
   
     .mark svg {
@@ -594,7 +612,7 @@
     .btn.primary:hover{ background: linear-gradient(135deg, rgba(124,58,237,1), rgba(34,211,238,.95)); }
 
     /* Hero */
-    .hero{
+    header.hero{
       padding: 56px 0 28px;
       position: relative;
     }
@@ -884,10 +902,8 @@
     <div class="logo-container">
   
       <!-- LOOP VISUAL -->
-      <div class="mark" style="width: 240px; height: 240px; display: flex; align-items: center; justify-content: center;">
-        <img src="assets/idea-build-support-sell-loop.gif" 
-             alt="Idea, Build, Support, Sell loop" 
-             style="width: 100%; height: 100%; object-fit: contain;" />
+      <div class="loop-visual">
+        <img src="assets/idea-build-support-sell-loop.gif" alt="Idea, Build, Support, Sell loop" />
       </div>
   
       <!-- WORDMARK -->
@@ -1230,6 +1246,10 @@
             <p style="margin-bottom:12px;">
               Idea → Build → Support → Sell → Idea
             </p>
+
+            <img src="assets/idea-build-support-sell-loop.gif"
+                 alt="Idea, Build, Support, Sell loop"
+                 style="width: 100%; max-width: 720px; height: auto; display: block; margin: 0 auto;" />
 
             <p style="margin-top:12px; color: var(--muted);">
               The loop is intentional: as you iterate, your library of assets grows—workflows, components, prompts,
