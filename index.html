@@ -103,35 +103,6 @@
       50%       { filter: drop-shadow(0 0 40px rgba(0,245,212,0.8)) drop-shadow(0 0 80px rgba(123,47,255,0.7)); }
     }
   
-    /* orbit ring */
-    .orbit {
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 170px; height: 170px;
-      border: 1px solid rgba(0,245,212,0.3);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      animation: spin 8s linear infinite;
-    }
-    .orbit::before {
-      content: '';
-      position: absolute;
-      top: -4px; left: 50%;
-      width: 8px; height: 8px;
-      background: var(--cyan);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--cyan);
-    }
-  
-    @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
-  
-    .orbit2 {
-      width: 200px; height: 200px;
-      border-color: rgba(123,47,255,0.2);
-      animation: spin 12s linear infinite reverse;
-    }
-    .orbit2::before { background: var(--electric); box-shadow: 0 0 10px var(--electric); }
-  
     /* ─── WORDMARK ─── */
     .wordmark {
       text-align: center;
@@ -912,52 +883,11 @@
 
     <div class="logo-container">
   
-      <!-- SVG MARK: stylized brain / signal wave / AI node -->
-      <div class="mark">
-        <div class="orbit"></div>
-        <div class="orbit orbit2"></div>
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- outer hexagon -->
-          <polygon points="50,5 91,27.5 91,72.5 50,95 9,72.5 9,27.5" stroke="url(#hexGrad)" stroke-width="1.5" fill="none" opacity="0.6"></polygon>
-  
-          <!-- neural nodes -->
-          <circle cx="50" cy="50" r="8" fill="url(#coreGrad)"></circle>
-          <circle cx="50" cy="50" r="13" stroke="url(#coreGrad)" stroke-width="0.8" fill="none" opacity="0.5"></circle>
-  
-          <!-- signal lines from center -->
-          <line x1="50" y1="37" x2="50" y2="18" stroke="url(#lineGrad)" stroke-width="1.5" stroke-linecap="round"></line>
-          <line x1="50" y1="63" x2="50" y2="82" stroke="url(#lineGrad)" stroke-width="1.5" stroke-linecap="round"></line>
-          <line x1="37" y1="43" x2="22" y2="34" stroke="url(#lineGrad)" stroke-width="1.5" stroke-linecap="round"></line>
-          <line x1="63" y1="43" x2="78" y2="34" stroke="url(#lineGrad)" stroke-width="1.5" stroke-linecap="round"></line>
-          <line x1="37" y1="57" x2="22" y2="66" stroke="url(#lineGrad)" stroke-width="1.5" stroke-linecap="round"></line>
-          <line x1="63" y1="57" x2="78" y2="66" stroke="url(#lineGrad)" stroke-width="1.5" stroke-linecap="round"></line>
-  
-          <!-- secondary nodes -->
-          <circle cx="50" cy="18" r="4" fill="#00f5d4"></circle>
-          <circle cx="50" cy="82" r="4" fill="#00f5d4"></circle>
-          <circle cx="22" cy="34" r="4" fill="#7b2fff"></circle>
-          <circle cx="78" cy="34" r="4" fill="#7b2fff"></circle>
-          <circle cx="22" cy="66" r="3" fill="rgba(0,245,212,0.6)"></circle>
-          <circle cx="78" cy="66" r="3" fill="rgba(0,245,212,0.6)"></circle>
-  
-          <!-- AI letterform in center -->
-          <text x="50" y="55" text-anchor="middle" font-family="&#39;Space Mono&#39;, monospace" font-size="11" font-weight="700" fill="#08080a" letter-spacing="-1">AI</text>
-  
-          <defs>
-            <lineargradient id="hexGrad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#00f5d4"></stop>
-              <stop offset="100%" stop-color="#7b2fff"></stop>
-            </lineargradient>
-            <radialgradient id="coreGrad" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#00f5d4"></stop>
-              <stop offset="100%" stop-color="#7b2fff"></stop>
-            </radialgradient>
-            <lineargradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#00f5d4" stop-opacity="0.9"></stop>
-              <stop offset="100%" stop-color="#7b2fff" stop-opacity="0.4"></stop>
-            </lineargradient>
-          </defs>
-        </svg>
+      <!-- LOOP VISUAL -->
+      <div class="mark" style="width: 240px; height: 240px; display: flex; align-items: center; justify-content: center;">
+        <img src="assets/idea-build-support-sell-loop.gif" 
+             alt="Idea, Build, Support, Sell loop" 
+             style="width: 100%; height: 100%; object-fit: contain;" />
       </div>
   
       <!-- WORDMARK -->
@@ -1300,11 +1230,6 @@
             <p style="margin-bottom:12px;">
               Idea → Build → Support → Sell → Idea
             </p>
-
-            <!-- Animated loop diagram -->
-            <img src="assets/idea-build-support-sell-loop.gif" 
-                 alt="Idea, Build, Support, Sell loop" 
-                 style="width: 100%; max-width: 720px; height: auto; display: block; margin: 0 auto;" />
 
             <p style="margin-top:12px; color: var(--muted);">
               The loop is intentional: as you iterate, your library of assets grows—workflows, components, prompts,
