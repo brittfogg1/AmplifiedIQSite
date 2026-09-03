@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShopOps | Owner Financials | Amplified IQ</title>
+  <meta name="description" content="ShopOps owner financials: Understand shop financial performance, spot what needs work, and run what-if scenarios before you change course." />
+  <meta name="theme-color" content="#070a14" />
+  <style>
+    :root {
+      --black: #08080a;
+      --white: #f2f0eb;
+      --cyan: #00f5d4;
+      --electric: #7b2fff;
+      --gold: #ffd60a;
+      --mid: #1a1a24;
+      --bg: #070a14;
+      --panel: rgba(255,255,255,.06);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --faint: rgba(255,255,255,.50);
+      --line: rgba(255,255,255,.12);
+      --shadow: 0 24px 70px rgba(0,0,0,.55);
+      --radius: 18px;
+      --max: 1160px;
+      --a: #7c3aed;
+      --b: #22d3ee;
+      --c: #34d399;
+      --d: #f59e0b;
+      --shopops-blue: #3b82f6;
+      --shopops-purple: #8b5cf6;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(1000px 500px at 20% 0%, rgba(59,130,246,.15), transparent 60%),
+        radial-gradient(900px 500px at 85% 15%, rgba(139,92,246,.12), transparent 55%),
+        radial-gradient(800px 400px at 50% 100%, rgba(124,58,237,.10), transparent 50%),
+        linear-gradient(180deg, #050713 0%, #070a14 45%, #050713 100%);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,10,20,.55);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; gap: 18px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 750; letter-spacing: .2px;
+    }
+    .mark {
+      width: 34px; height: 34px; border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 40%),
+        linear-gradient(135deg, rgba(59,130,246,.95), rgba(139,92,246,.85));
+      box-shadow: 0 14px 32px rgba(59,130,246,.25);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .nav-links {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      color: var(--muted); font-weight: 550; font-size: 14px;
+    }
+    .nav-links a {
+      padding: 10px 10px; border-radius: 12px;
+      transition: background .2s ease, color .2s ease;
+    }
+    .nav-links a:hover {
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px; padding: 11px 18px; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text); font-weight: 650; font-size: 14px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.32);
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      cursor: pointer; font-family: inherit;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.22);
+    }
+    .btn.primary {
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,211,238,.85));
+      border-color: rgba(255,255,255,.18);
+    }
+    .btn.primary:hover {
+      background: linear-gradient(135deg, rgba(124,58,237,1), rgba(34,211,238,.95));
+    }
+
+    .hero {
+      padding: 64px 0 72px;
+      position: relative;
+    }
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.06;
+      letter-spacing: -1px;
+    }
+    h1 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--shopops-blue), var(--shopops-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .lead {
+      margin: 20px auto 0;
+      color: var(--muted);
+      font-size: clamp(17px, 2.1vw, 20px);
+      line-height: 1.55;
+      max-width: 65ch;
+    }
+
+    section { padding: 40px 0; }
+    .section-head {
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 32px;
+    }
+    .feature-card {
+      padding: 28px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+      transition: transform .15s ease, border-color .2s ease, background .2s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+    }
+    .feature-label {
+      font-size: 11px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--shopops-blue);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .feature-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: -.3px;
+    }
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .accent-1 { box-shadow: 0 0 0 1px rgba(59,130,246,.25) inset; }
+    .accent-2 { box-shadow: 0 0 0 1px rgba(139,92,246,.22) inset; }
+    .accent-3 { box-shadow: 0 0 0 1px rgba(34,211,238,.20) inset; }
+    .accent-4 { box-shadow: 0 0 0 1px rgba(52,211,153,.18) inset; }
+
+    .cta-box {
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(900px 320px at 20% 20%, rgba(124,58,237,.28), transparent 60%),
+        radial-gradient(900px 320px at 85% 35%, rgba(34,211,238,.18), transparent 55%),
+        rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .cta-inner {
+      padding: 32px 28px;
+      text-align: center;
+    }
+    .cta-inner h2 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 34px);
+      letter-spacing: -.4px;
+      line-height: 1.15;
+    }
+    .cta-inner > p {
+      margin: 14px auto 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+      max-width: 60ch;
+    }
+    .cta-actions { 
+      margin-top: 22px; 
+      display: flex; 
+      gap: 12px; 
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 22px 0 32px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .foot a:hover { color: var(--text); }
+
+    @media (max-width: 900px) {
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .grid-4 { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .btn { width: 100%; justify-content: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap">
+      <div class="nav-inner">
+        <a href="index.html" class="brand">
+          <span class="mark" aria-hidden="true"></span>
+          <span>Amplified IQ</span>
+        </a>
+        <div class="nav-links">
+          <a href="shopops.html">Sell more</a>
+          <a href="shopops-workflow.html">Shop workflow</a>
+          <a href="shopops-financials.html">Owner financials</a>
+          <a href="mailto:hello@amplifiediq.ai?subject=ShopOps%20Demo" class="btn primary">Request a demo</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header id="top" class="hero">
+    <div class="wrap">
+      <div class="hero-content">
+        <h1>See where to improve <em>profitability</em></h1>
+        <p class="lead">
+          Understand shop financial performance, spot what needs work, and run what-if scenarios before you change course.
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="grid-4">
+        <article class="feature-card accent-1">
+          <div class="feature-label">Performance</div>
+          <h3>Performance</h3>
+          <p>
+            Track shop financial performance with clarity. See the numbers that matter for profitability and growth.
+          </p>
+        </article>
+
+        <article class="feature-card accent-2">
+          <div class="feature-label">For the owner</div>
+          <h3>For the owner</h3>
+          <p>
+            Built for shop owners who need visibility into the business, not generic reports that miss the point.
+          </p>
+        </article>
+
+        <article class="feature-card accent-3">
+          <div class="feature-label">Where to improve</div>
+          <h3>Where to improve</h3>
+          <p>
+            Spot what needs work. Know which areas of the business are profitable and which need attention.
+          </p>
+        </article>
+
+        <article class="feature-card accent-4">
+          <div class="feature-label">What-if</div>
+          <h3>What-if</h3>
+          <p>
+            Run what-if scenarios before making changes. Model the impact and make informed decisions.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding: 48px 0 64px;">
+    <div class="wrap">
+      <div class="cta-box">
+        <div class="cta-inner">
+          <h2>Sell more. Then see if it pays.</h2>
+          <p>
+            Financial visibility so you know what's working and what needs to change.
+          </p>
+          <div class="cta-actions">
+            <a class="btn primary" href="mailto:hello@amplifiediq.ai?subject=ShopOps%20Demo">Request a demo</a>
+            <a class="btn" href="shopops.html">Back to ShopOps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="width: 22px; height: 22px; border-radius: 10px; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 40%), linear-gradient(135deg, rgba(59,130,246,.95), rgba(139,92,246,.85)); box-shadow: 0 8px 20px rgba(59,130,246,.2); border: 1px solid rgba(255,255,255,.14);" aria-hidden="true"></span>
+          <span>© <span id="y"></span> AmplifiedIQ.ai</span>
+        </div>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+          <a href="index.html">Home</a>
+          <a href="agmodel.html">AgModel</a>
+          <a href="shopops.html">ShopOps</a>
+          <a href="operating-system.html">AmpIQ OS</a>
+          <a href="sales-planning.html">Sales Planning</a>
+          <a href="time-back.html">Time back</a>
+          <a href="mailto:hello@amplifiediq.ai">hello@amplifiediq.ai</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href]');
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+
+      if (/^mailto:/i.test(href)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        window.location.href = href;
+        return;
+      }
+
+      if (href.charAt(0) !== '#' || href === '#') return;
+      var el = document.getElementById(href.slice(1));
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.pushState(null, '', href);
+    }, true);
+  </script>
+</body>
+</html>
