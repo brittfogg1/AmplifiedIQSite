@@ -99,15 +99,126 @@
 
     .loop-visual {
       position: relative;
-      width: min(580px, 92vw);
+      width: min(420px, 88vw);
       background: transparent;
     }
 
-    .loop-visual img {
+    .loop-visual img,
+    .loop-visual svg {
       width: 100%;
       height: auto;
       display: block;
     }
+
+    .loop-orbit {
+      --ring-inset: 22%;
+      --ring-r: 28cqi;
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      max-width: 420px;
+      margin: 0 auto;
+      container-type: inline-size;
+    }
+    .loop-orbit-ring {
+      position: absolute;
+      inset: var(--ring-inset);
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.12);
+      box-shadow: 0 0 40px rgba(124,58,237,.18), inset 0 0 40px rgba(34,211,238,.08);
+      container-type: inline-size;
+    }
+    .loop-orbit-ring::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: #7c3aed;
+      border-right-color: #22d3ee;
+      border-bottom-color: #34d399;
+      border-left-color: #f59e0b;
+      opacity: .55;
+      animation: loopSpin 18s linear infinite;
+    }
+    .loop-hubs,
+    .loop-arrows {
+      position: absolute;
+      inset: 0;
+    }
+    .loop-hubs { z-index: 2; }
+    .loop-arrows {
+      z-index: 1;
+      animation: loopSpin 18s linear infinite;
+      pointer-events: none;
+    }
+    .loop-orbit-ring::after { z-index: 0; }
+    .loop-pill,
+    .loop-arrow {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+    }
+    .loop-pill {
+      width: 188px;
+      height: 58px;
+      margin: -29px 0 0 -94px;
+      transform: rotate(var(--a)) translateY(calc(var(--ring-r) * -1)) rotate(calc(var(--a) * -1));
+    }
+    .loop-pill.support { width: 220px; margin-left: -110px; }
+    .loop-pill-inner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      height: 100%;
+      padding: 0 22px 0 14px;
+      border-radius: 999px;
+      border: 1.5px solid var(--pill);
+      background: rgba(7,10,20,.78);
+      color: #f2f0eb;
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: 1.4px;
+      box-shadow: 0 0 22px color-mix(in srgb, var(--pill) 35%, transparent);
+    }
+    .loop-pill-ico {
+      width: 32px;
+      height: 32px;
+      flex: 0 0 32px;
+      display: grid;
+      place-items: center;
+      color: var(--pill);
+    }
+    .loop-pill-ico svg {
+      width: 30px;
+      height: 30px;
+      display: block;
+      filter: drop-shadow(0 0 8px color-mix(in srgb, var(--pill) 70%, transparent));
+    }
+    .loop-pill.idea { --pill: #7c3aed; --a: 0deg; }
+    .loop-pill.build { --pill: #22d3ee; --a: 90deg; }
+    .loop-pill.support { --pill: #34d399; --a: 180deg; }
+    .loop-pill.sell { --pill: #f59e0b; --a: 270deg; }
+    .loop-arrow {
+      width: 44px;
+      height: 44px;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      opacity: 0.42;
+      transform: translate(-50%, -50%) rotate(var(--a)) translateY(-50cqi);
+    }
+    .loop-arrow svg {
+      width: 40px;
+      height: 40px;
+      display: block;
+      fill: none;
+      stroke: #f2f0eb;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    @keyframes loopSpin { to { transform: rotate(360deg); } }
   
     .mark svg {
       width: 100%;
@@ -892,18 +1003,63 @@
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
       *{ transition:none !important; scroll-behavior: auto !important; }
+      .loop-arrows, .loop-orbit-ring::after { animation: none !important; }
     }
   </style>
 </head>
 
 <body>
+  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" style="position:absolute;overflow:hidden">
+    <symbol id="ico-idea" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 18h6M10 21h4"/>
+      <path d="M8 14.2A6.2 6.2 0 1 1 16 14.2c0 1.7-.8 2.6-1.6 3.4H9.6C8.8 16.8 8 15.9 8 14.2Z"/>
+      <path d="M10.2 10.2 12 12l1.8-1.8"/>
+    </symbol>
+    <symbol id="ico-build" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 21V10h12v11"/>
+      <path d="M15 14h6v7H3"/>
+      <path d="M7 10V6h2.2L11 10"/>
+      <path d="M6 13h2M10 13h2"/>
+      <path d="M17.2 14V9.5h2.2"/>
+    </symbol>
+    <symbol id="ico-support" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 13V7.8a1.8 1.8 0 0 1 3.6 0V13"/>
+      <path d="M11.6 12.5V7.2a1.7 1.7 0 0 1 3.4.3V13"/>
+      <path d="M15 13V9.2a1.6 1.6 0 0 1 3.2.4V14.5"/>
+      <path d="M4.8 14.2 8 12.6c1 .6 2.4 1 4 1s3-.4 4-1l3.2 1.6v1.8c0 2.6-3.2 4.6-7.2 4.6s-7.2-2-7.2-4.6v-1.8Z"/>
+    </symbol>
+    <symbol id="ico-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 5l10 7-10 7"/>
+      <path d="M4 12h13"/>
+    </symbol>
+    <symbol id="ico-sell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="8.2"/>
+      <path d="M14.4 8.6c-.6-.6-1.4-.9-2.4-.9-1.8 0-3 1-3 2.4 0 3.4 6 1.4 6 4.6 0 1.5-1.3 2.6-3.2 2.6-1.1 0-2.1-.4-2.8-1.1"/>
+      <path d="M12 6.8v1.4M12 17.8v-1.4"/>
+    </symbol>
+  </svg>
   <section class="hero">
 
     <div class="logo-container">
   
       <!-- LOOP VISUAL -->
       <div class="loop-visual">
-        <img src="assets/idea-build-support-sell-loop.gif" alt="Idea, Build, Support, Sell loop" />
+        <div class="loop-orbit" role="img" aria-label="Idea, Build, Support, Sell loop">
+          <div class="loop-orbit-ring">
+            <div class="loop-arrows">
+              <span class="loop-arrow" style="--a:45deg"><svg><use href="#ico-arrow"/></svg></span>
+              <span class="loop-arrow" style="--a:135deg"><svg><use href="#ico-arrow"/></svg></span>
+              <span class="loop-arrow" style="--a:225deg"><svg><use href="#ico-arrow"/></svg></span>
+              <span class="loop-arrow" style="--a:315deg"><svg><use href="#ico-arrow"/></svg></span>
+            </div>
+          </div>
+          <div class="loop-hubs">
+            <div class="loop-pill idea"><div class="loop-pill-inner"><span class="loop-pill-ico" aria-hidden="true"><svg><use href="#ico-idea"/></svg></span>IDEA</div></div>
+            <div class="loop-pill build"><div class="loop-pill-inner"><span class="loop-pill-ico" aria-hidden="true"><svg><use href="#ico-build"/></svg></span>BUILD</div></div>
+            <div class="loop-pill support"><div class="loop-pill-inner"><span class="loop-pill-ico" aria-hidden="true"><svg><use href="#ico-support"/></svg></span>SUPPORT</div></div>
+            <div class="loop-pill sell"><div class="loop-pill-inner"><span class="loop-pill-ico" aria-hidden="true"><svg><use href="#ico-sell"/></svg></span>SELL</div></div>
+          </div>
+        </div>
       </div>
   
       <!-- WORDMARK -->
@@ -1246,9 +1402,22 @@
               Idea → Build → Support → Sell → Idea
             </p>
 
-            <img src="assets/idea-build-support-sell-loop.gif"
-                 alt="Idea, Build, Support, Sell loop"
-                 style="width: 100%; max-width: 720px; height: auto; display: block; margin: 0 auto;" />
+            <div class="loop-orbit" role="img" aria-label="Idea, Build, Support, Sell loop">
+              <div class="loop-orbit-ring">
+                <div class="loop-arrows">
+                  <span class="loop-arrow" style="--a:45deg"><svg><use href="#ico-arrow"/></svg></span>
+                  <span class="loop-arrow" style="--a:135deg"><svg><use href="#ico-arrow"/></svg></span>
+                  <span class="loop-arrow" style="--a:225deg"><svg><use href="#ico-arrow"/></svg></span>
+                  <span class="loop-arrow" style="--a:315deg"><svg><use href="#ico-arrow"/></svg></span>
+                </div>
+              </div>
+              <div class="loop-hubs">
+                <div class="loop-pill idea"><div class="loop-pill-inner"><span class="loop-pill-ico" aria-hidden="true"><svg><use href="#ico-idea"/></svg></span>IDEA</div></div>
+                <div class="loop-pill build"><div class="loop-pill-inner"><span class="loop-pill-ico" aria-hidden="true"><svg><use href="#ico-build"/></svg></span>BUILD</div></div>
+                <div class="loop-pill support"><div class="loop-pill-inner"><span class="loop-pill-ico" aria-hidden="true"><svg><use href="#ico-support"/></svg></span>SUPPORT</div></div>
+                <div class="loop-pill sell"><div class="loop-pill-inner"><span class="loop-pill-ico" aria-hidden="true"><svg><use href="#ico-sell"/></svg></span>SELL</div></div>
+              </div>
+            </div>
 
             <p style="margin-top:12px; color: var(--muted);">
               The loop is intentional: as you iterate, your library of assets grows—workflows, components, prompts,
