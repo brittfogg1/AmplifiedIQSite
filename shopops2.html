@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShopOps | Sell More — From Call to Pickup | Amplified IQ</title>
+  <meta name="description" content="ShopOps: The sales system built for your service advisors—from the first call to pickup. Capture every opportunity, get vehicles on the calendar, and close with confidence." />
+  <meta name="theme-color" content="#070a14" />
+  <style>
+    :root {
+      --black: #08080a;
+      --white: #f2f0eb;
+      --cyan: #00f5d4;
+      --electric: #7b2fff;
+      --gold: #ffd60a;
+      --mid: #1a1a24;
+      --bg: #070a14;
+      --panel: rgba(255,255,255,.06);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --faint: rgba(255,255,255,.50);
+      --line: rgba(255,255,255,.12);
+      --shadow: 0 24px 70px rgba(0,0,0,.55);
+      --radius: 18px;
+      --max: 1160px;
+      --a: #7c3aed;
+      --b: #22d3ee;
+      --c: #34d399;
+      --d: #f59e0b;
+      --shopops-blue: #3b82f6;
+      --shopops-purple: #8b5cf6;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(1000px 500px at 20% 0%, rgba(59,130,246,.15), transparent 60%),
+        radial-gradient(900px 500px at 85% 15%, rgba(139,92,246,.12), transparent 55%),
+        radial-gradient(800px 400px at 50% 100%, rgba(124,58,237,.10), transparent 50%),
+        linear-gradient(180deg, #050713 0%, #070a14 45%, #050713 100%);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,10,20,.55);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; gap: 18px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 750; letter-spacing: .2px;
+    }
+    .mark {
+      width: 34px; height: 34px; border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 40%),
+        linear-gradient(135deg, rgba(59,130,246,.95), rgba(139,92,246,.85));
+      box-shadow: 0 14px 32px rgba(59,130,246,.25);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .nav-links {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      color: var(--muted); font-weight: 550; font-size: 14px;
+    }
+    .nav-links a {
+      padding: 10px 10px; border-radius: 12px;
+      transition: background .2s ease, color .2s ease;
+    }
+    .nav-links a:hover {
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px; padding: 11px 18px; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text); font-weight: 650; font-size: 14px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.32);
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      cursor: pointer; font-family: inherit;
+    }
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.22);
+    }
+    .btn.primary {
+      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,211,238,.85));
+      border-color: rgba(255,255,255,.18);
+    }
+    .btn.primary:hover {
+      background: linear-gradient(135deg, rgba(124,58,237,1), rgba(34,211,238,.95));
+    }
+
+    .hero {
+      padding: 48px 0 56px;
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 14px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--muted); font-weight: 650; font-size: 13px;
+    }
+    h1 {
+      margin: 18px 0 0;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.06;
+      letter-spacing: -1px;
+    }
+    h1 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--shopops-blue), var(--shopops-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .lead {
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: clamp(17px, 2.1vw, 20px);
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+    .hero-actions { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .journey-panel {
+      padding: 24px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(59,130,246,.25);
+      background: rgba(59,130,246,.06);
+      box-shadow: var(--shadow);
+    }
+    .journey-label {
+      font-size: 13px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--shopops-blue);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .journey-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .journey-step:last-child { border-bottom: none; }
+    .journey-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--shopops-blue), var(--shopops-purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--white);
+    }
+    .journey-content {
+      flex: 1;
+    }
+    .journey-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+    .journey-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .journey-tagline {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.12);
+      font-size: 14px;
+      font-weight: 650;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    section { padding: 40px 0; }
+    .section-head {
+      margin-bottom: 28px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(26px, 3.2vw, 38px);
+      letter-spacing: -.5px;
+      line-height: 1.15;
+    }
+    .section-head p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.65;
+      max-width: 68ch;
+    }
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--shopops-blue);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+    .phase-card {
+      padding: 24px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      transition: transform .15s ease, border-color .2s ease, background .2s ease;
+    }
+    .phase-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+    }
+    .phase-num {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(59,130,246,.3), rgba(139,92,246,.2));
+      border: 1px solid rgba(59,130,246,.35);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      color: var(--shopops-blue);
+      margin-bottom: 12px;
+    }
+    .phase-card h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing: -.3px;
+    }
+    .phase-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .phase-list {
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .phase-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin: 8px 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .phase-list li::before {
+      content: '→';
+      color: var(--shopops-blue);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .accent-1 { box-shadow: 0 0 0 1px rgba(59,130,246,.25) inset; }
+    .accent-2 { box-shadow: 0 0 0 1px rgba(139,92,246,.22) inset; }
+    .accent-3 { box-shadow: 0 0 0 1px rgba(34,211,238,.20) inset; }
+    .accent-4 { box-shadow: 0 0 0 1px rgba(52,211,153,.18) inset; }
+
+    .bridge-section {
+      margin-top: 48px;
+    }
+    .bridge-title {
+      font-size: clamp(24px, 2.8vw, 34px);
+      letter-spacing: -.4px;
+      line-height: 1.2;
+      margin-bottom: 28px;
+      text-align: center;
+    }
+    .bridge-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+    .bridge-card {
+      padding: 26px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+      transition: transform .15s ease, border-color .2s ease;
+    }
+    .bridge-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.20);
+    }
+    .bridge-label {
+      font-size: 11px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--shopops-blue);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .bridge-card h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      letter-spacing: -.3px;
+    }
+    .bridge-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .bridge-card ul li {
+      margin: 8px 0;
+    }
+    .bridge-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 14px;
+      font-size: 14px;
+      font-weight: 650;
+      color: var(--shopops-blue);
+      transition: color .2s ease;
+    }
+    .bridge-link:hover {
+      color: var(--text);
+    }
+
+    .cta-box {
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(900px 320px at 20% 20%, rgba(124,58,237,.28), transparent 60%),
+        radial-gradient(900px 320px at 85% 35%, rgba(34,211,238,.18), transparent 55%),
+        rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .cta-inner {
+      padding: 32px 28px;
+    }
+    .cta-inner h2 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 34px);
+      letter-spacing: -.4px;
+      line-height: 1.15;
+    }
+    .cta-inner > p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+      max-width: 70ch;
+    }
+    .cta-actions { margin-top: 22px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 22px 0 32px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .foot a:hover { color: var(--text); }
+
+    @media (max-width: 980px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .grid-2, .bridge-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .nav-links { display: none; }
+      .btn { width: 100%; justify-content: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap">
+      <div class="nav-inner">
+        <a href="index.html" class="brand">
+          <span class="mark" aria-hidden="true"></span>
+          <span>Amplified IQ</span>
+        </a>
+        <div class="nav-links">
+          <a href="#journey">Sell more</a>
+          <a href="shopops-workflow.html">Shop workflow</a>
+          <a href="shopops-financials.html">Owner financials</a>
+          <a href="mailto:hello@amplifiediq.ai?subject=ShopOps%20Demo" class="btn primary">Request a demo</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header id="top" class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">For AAMCO & auto repair operators</div>
+          <h1>Sell more — <em>from call to pickup</em></h1>
+          <p class="lead">
+            ShopOps is the sales system built for your service advisors—from the first call to pickup. Capture every opportunity, get vehicles on the calendar, and close with confidence.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="mailto:hello@amplifiediq.ai?subject=ShopOps%20Demo">Request a demo</a>
+            <a class="btn" href="index.html">Back to Amplified IQ</a>
+          </div>
+        </div>
+
+        <aside class="journey-panel">
+          <div class="journey-label">Customer's journey</div>
+          
+          <div class="journey-step">
+            <div class="journey-num">01</div>
+            <div class="journey-content">
+              <div class="journey-title">Intake</div>
+              <div class="journey-desc">Get the vehicle on the calendar</div>
+            </div>
+          </div>
+
+          <div class="journey-step">
+            <div class="journey-num">02</div>
+            <div class="journey-content">
+              <div class="journey-title">Arrival</div>
+              <div class="journey-desc">Protect the sale at drop-off</div>
+            </div>
+          </div>
+
+          <div class="journey-step">
+            <div class="journey-num">03</div>
+            <div class="journey-content">
+              <div class="journey-title">Estimates</div>
+              <div class="journey-desc">Turn quotes into paying customers</div>
+            </div>
+          </div>
+
+          <div class="journey-step">
+            <div class="journey-num">04</div>
+            <div class="journey-content">
+              <div class="journey-title">Pickup</div>
+              <div class="journey-desc">Today's visit → tomorrow's sales</div>
+            </div>
+          </div>
+
+          <div class="journey-tagline">
+            Every step improves the customer experience — and helps you sell more
+          </div>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <section id="journey">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The customer's journey</p>
+        <h2>Four phases. Better experience. More sold work.</h2>
+        <p>
+          Every step of the sales process in ShopOps improves the customer experience.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        <article class="phase-card accent-1">
+          <span class="phase-num">01 INTAKE</span>
+          <h3>Get the vehicle on the calendar</h3>
+          <ul class="phase-list">
+            <li>Capture every call & walk-in</li>
+            <li>CSM prompted through key selling points</li>
+            <li>Nothing skipped in the conversation</li>
+          </ul>
+        </article>
+
+        <article class="phase-card accent-2">
+          <span class="phase-num">02 ARRIVAL</span>
+          <h3>Protect the sale at drop-off</h3>
+          <ul class="phase-list">
+            <li>Guided process when the vehicle arrives</li>
+            <li>Surface add-on opportunities early</li>
+            <li>Keep the booked work locked in</li>
+          </ul>
+        </article>
+
+        <article class="phase-card accent-3">
+          <span class="phase-num">03 ESTIMATES</span>
+          <h3>Turn quotes into paying customers</h3>
+          <ul class="phase-list">
+            <li>Selling points at the moment of recommend</li>
+            <li>Talking points to work the close</li>
+            <li>Estimates that convert, not just inform</li>
+          </ul>
+        </article>
+
+        <article class="phase-card accent-4">
+          <span class="phase-num">04 PICKUP</span>
+          <h3>Today's visit → tomorrow's sales</h3>
+          <ul class="phase-list">
+            <li>Guided handoff at pickup</li>
+            <li>Openings for follow-up services</li>
+            <li>Customers who come back ready to buy</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="bridge-section">
+        <h2 class="bridge-title">Sold work that stays profitable</h2>
+        
+        <div class="bridge-grid">
+          <div class="bridge-card">
+            <div class="bridge-label">→ Shop workflow</div>
+            <h3>Sold work flows through the bay</h3>
+            <ul>
+              <li>Tools to manage shop workflow</li>
+              <li>Technician time on each RO</li>
+              <li>Keep every sold job moving</li>
+            </ul>
+            <a href="shopops-workflow.html" class="bridge-link">
+              Learn more →
+            </a>
+          </div>
+
+          <div class="bridge-card">
+            <div class="bridge-label">→ Owner financials</div>
+            <h3>Performance visibility + what-if profit</h3>
+            <ul>
+              <li>Financial performance for the owner</li>
+              <li>See where improvements are needed</li>
+              <li>What-if scenarios going forward</li>
+            </ul>
+            <a href="shopops-financials.html" class="bridge-link">
+              Learn more →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding: 48px 0 64px;">
+    <div class="wrap">
+      <div class="cta-box">
+        <div class="cta-inner">
+          <h2>Sell more. Deliver it. Improve from there.</h2>
+          <p>
+            ShopOps connects counter sales, shop workflow, and owner financials—so the work you sell gets through the shop and stays profitable.
+          </p>
+          <div class="cta-actions">
+            <a class="btn primary" href="mailto:hello@amplifiediq.ai?subject=ShopOps%20Demo">Request a demo</a>
+            <a class="btn" href="index.html">Learn about Amplified IQ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="width: 22px; height: 22px; border-radius: 10px; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 40%), linear-gradient(135deg, rgba(59,130,246,.95), rgba(139,92,246,.85)); box-shadow: 0 8px 20px rgba(59,130,246,.2); border: 1px solid rgba(255,255,255,.14);" aria-hidden="true"></span>
+          <span>© <span id="y"></span> AmplifiedIQ.ai</span>
+        </div>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+          <a href="index.html">Home</a>
+          <a href="agmodel.html">AgModel</a>
+          <a href="shopops.html">ShopOps</a>
+          <a href="operating-system.html">AmpIQ OS</a>
+          <a href="sales-planning.html">SalesPlanIQ</a>
+          <a href="time-back.html">Time back</a>
+          <a href="mailto:hello@amplifiediq.ai">hello@amplifiediq.ai</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href]');
+      if (!a) return;
+      var href = a.getAttribute('href') || '';
+
+      if (/^mailto:/i.test(href)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        window.location.href = href;
+        return;
+      }
+
+      if (href.charAt(0) !== '#' || href === '#') return;
+      var el = document.getElementById(href.slice(1));
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.pushState(null, '', href);
+    }, true);
+  </script>
+</body>
+</html>

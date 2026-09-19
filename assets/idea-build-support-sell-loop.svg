@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-labelledby="loopTitle">
+  <title id="loopTitle">Idea, Build, Support, Sell loop</title>
+  <defs>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="33%" stop-color="#22d3ee"/>
+      <stop offset="66%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <style>
+      .orbit { transform-origin: 450px 450px; animation: spin 16s linear infinite; }
+      .keep { transform-origin: 0px 0px; animation: spin 16s linear infinite reverse; }
+      .dash { stroke-dasharray: 110 1460; animation: dash 16s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      @keyframes dash { to { stroke-dashoffset: -1570; } }
+      @media (prefers-reduced-motion: reduce) {
+        .orbit, .keep, .dash { animation: none; }
+      }
+    </style>
+  </defs>
+
+  <circle cx="450" cy="450" r="250" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="2"/>
+  <circle cx="450" cy="450" r="250" fill="none" stroke="url(#ringGrad)" stroke-width="10" opacity="0.16" filter="url(#glow)"/>
+  <circle class="dash" cx="450" cy="450" r="250" fill="none" stroke="url(#ringGrad)" stroke-width="5" stroke-linecap="round" filter="url(#glow)" transform="rotate(-90 450 450)"/>
+
+  <g class="orbit">
+    <g transform="translate(450,200)">
+      <g class="keep">
+        <rect x="-92" y="-30" width="184" height="60" rx="30" fill="rgba(7,10,20,0.78)" stroke="#7c3aed" stroke-width="2.2"/>
+        <circle cx="-58" cy="0" r="16" fill="#7c3aed"/>
+        <path d="M-58-7c-4 3-4 8 0 11m0-11c4 3 4 8 0 11M-58 6v5" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
+        <text x="12" y="6" text-anchor="middle" fill="#f2f0eb" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="20" font-weight="800" letter-spacing="1.6">IDEA</text>
+      </g>
+    </g>
+    <g transform="translate(700,450)">
+      <g class="keep">
+        <rect x="-96" y="-30" width="192" height="60" rx="30" fill="rgba(7,10,20,0.78)" stroke="#22d3ee" stroke-width="2.2"/>
+        <circle cx="-58" cy="0" r="16" fill="#22d3ee"/>
+        <rect x="-65" y="-6" width="6" height="12" rx="1" fill="#042026"/>
+        <rect x="-57" y="-6" width="6" height="12" rx="1" fill="#042026"/>
+        <text x="14" y="6" text-anchor="middle" fill="#f2f0eb" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="20" font-weight="800" letter-spacing="1.6">BUILD</text>
+      </g>
+    </g>
+    <g transform="translate(450,700)">
+      <g class="keep">
+        <rect x="-112" y="-30" width="224" height="60" rx="30" fill="rgba(7,10,20,0.78)" stroke="#34d399" stroke-width="2.2"/>
+        <circle cx="-74" cy="0" r="16" fill="#34d399"/>
+        <path d="M-80 1l5 5 10-11" fill="none" stroke="#042016" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="16" y="6" text-anchor="middle" fill="#f2f0eb" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="20" font-weight="800" letter-spacing="1.2">SUPPORT</text>
+      </g>
+    </g>
+    <g transform="translate(200,450)">
+      <g class="keep">
+        <rect x="-90" y="-30" width="180" height="60" rx="30" fill="rgba(7,10,20,0.78)" stroke="#f59e0b" stroke-width="2.2"/>
+        <circle cx="-54" cy="0" r="16" fill="#f59e0b"/>
+        <path d="M-62 6l6-9 5 5 8-10" fill="none" stroke="#2a1804" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="12" y="6" text-anchor="middle" fill="#f2f0eb" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="20" font-weight="800" letter-spacing="1.6">SELL</text>
+      </g>
+    </g>
+  </g>
+</svg>

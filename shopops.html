@@ -1,644 +1,793 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ShopOps | Sell More — From Call to Pickup | Amplified IQ</title>
-  <meta name="description" content="ShopOps: The sales system built for your service advisors—from the first call to pickup. Capture every opportunity, get vehicles on the calendar, and close with confidence." />
-  <meta name="theme-color" content="#070a14" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ShopOps — the system of operations for your shop. AMS is the system of record. Cars in. Cars out. Nothing lost in between." />
+  <title>ShopOps — Cars in. Cars out. Nothing lost in between.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --black: #08080a;
-      --white: #f2f0eb;
-      --cyan: #00f5d4;
-      --electric: #7b2fff;
-      --gold: #ffd60a;
-      --mid: #1a1a24;
-      --bg: #070a14;
-      --panel: rgba(255,255,255,.06);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.68);
-      --faint: rgba(255,255,255,.50);
-      --line: rgba(255,255,255,.12);
-      --shadow: 0 24px 70px rgba(0,0,0,.55);
-      --radius: 18px;
-      --max: 1160px;
-      --a: #7c3aed;
-      --b: #22d3ee;
-      --c: #34d399;
-      --d: #f59e0b;
-      --shopops-blue: #3b82f6;
-      --shopops-purple: #8b5cf6;
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --navy: #0b1f3a;
+      --navy-deep: #071528;
+      --navy-mid: #123056;
+      --sidebar: #1a365d;
+      --accent: #2b6cb0;
+      --accent-bright: #3b82f6;
+      --sky: #e8f1fb;
+      --mist: #f4f7fb;
+      --ink: #0f172a;
+      --muted: #475569;
+      --line: #dbe4f0;
+      --white: #ffffff;
+      --trust: #0d9488;
+      --warn: #c2410c;
+      --radius: 14px;
+      --shadow: 0 18px 50px rgba(11, 31, 58, 0.12);
+      --max: 1120px;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      font-family: var(--font);
-      color: var(--text);
-      background:
-        radial-gradient(1000px 500px at 20% 0%, rgba(59,130,246,.15), transparent 60%),
-        radial-gradient(900px 500px at 85% 15%, rgba(139,92,246,.12), transparent 55%),
-        radial-gradient(800px 400px at 50% 100%, rgba(124,58,237,.10), transparent 50%),
-        linear-gradient(180deg, #050713 0%, #070a14 45%, #050713 100%);
-      overflow-x: hidden;
-      min-height: 100vh;
+      font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
     }
-
+    img { max-width: 100%; height: auto; display: block; }
     a { color: inherit; text-decoration: none; }
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+    .container { width: min(100% - 2.5rem, var(--max)); margin-inline: auto; }
 
-    .nav {
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: blur(14px);
-      background: rgba(7,10,20,.55);
+    /* Header */
+    .site-header {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
-    .nav-inner {
+    .header-inner {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 0; gap: 18px;
+      padding: 0.9rem 0; gap: 1rem;
     }
-    .brand {
-      display: flex; align-items: center; gap: 10px;
-      font-weight: 750; letter-spacing: .2px;
+    .logo {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-weight: 700; font-size: 1.15rem; color: var(--navy);
+      letter-spacing: -0.02em;
     }
-    .mark {
-      width: 34px; height: 34px; border-radius: 12px;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 40%),
-        linear-gradient(135deg, rgba(59,130,246,.95), rgba(139,92,246,.85));
-      box-shadow: 0 14px 32px rgba(59,130,246,.25);
-      border: 1px solid rgba(255,255,255,.14);
+    .logo-mark {
+      width: 1.65rem; height: 1.65rem; border-radius: 7px;
+      background: linear-gradient(145deg, var(--sidebar), var(--accent));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
     }
-    .nav-links {
-      display: flex; gap: 16px; flex-wrap: wrap;
-      color: var(--muted); font-weight: 550; font-size: 14px;
+    .nav { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+    .nav a { font-size: 0.92rem; color: var(--muted); font-weight: 500; }
+    .nav a:hover { color: var(--navy); }
+    .nav-cta {
+      background: var(--navy) !important; color: var(--white) !important;
+      padding: 0.55rem 0.95rem; border-radius: 999px; font-weight: 600 !important;
     }
-    .nav-links a {
-      padding: 10px 10px; border-radius: 12px;
-      transition: background .2s ease, color .2s ease;
-    }
-    .nav-links a:hover {
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-    }
+    .nav-cta:hover { background: var(--navy-mid) !important; }
 
+    /* Buttons */
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
-      gap: 10px; padding: 11px 18px; border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.06);
-      color: var(--text); font-weight: 650; font-size: 14px;
-      box-shadow: 0 18px 40px rgba(0,0,0,.32);
-      transition: transform .15s ease, background .2s ease, border-color .2s ease;
-      cursor: pointer; font-family: inherit;
+      padding: 0.85rem 1.35rem; border-radius: 999px; font-weight: 600;
+      font-size: 0.98rem; border: 1px solid transparent; transition: 0.15s ease;
     }
-    .btn:hover {
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.09);
-      border-color: rgba(255,255,255,.22);
+    .btn-primary { background: var(--accent-bright); color: var(--white); }
+    .btn-primary:hover { background: var(--accent); }
+    .btn-ghost {
+      background: transparent; color: var(--white);
+      border-color: rgba(255,255,255,0.35);
     }
-    .btn.primary {
-      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,211,238,.85));
-      border-color: rgba(255,255,255,.18);
+    .btn-ghost:hover { background: rgba(255,255,255,0.08); }
+    .btn-dark { background: var(--navy); color: var(--white); }
+    .btn-dark:hover { background: var(--navy-mid); }
+    .btn-outline {
+      background: var(--white); color: var(--navy);
+      border-color: var(--line);
     }
-    .btn.primary:hover {
-      background: linear-gradient(135deg, rgba(124,58,237,1), rgba(34,211,238,.95));
-    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
+    /* Hero */
     .hero {
-      padding: 48px 0 56px;
-      position: relative;
+      background:
+        radial-gradient(ellipse 80% 60% at 85% 10%, rgba(59,130,246,0.22), transparent 55%),
+        linear-gradient(165deg, var(--navy-deep) 0%, var(--navy) 48%, var(--sidebar) 100%);
+      color: var(--white);
+      padding: 4.5rem 0 4rem;
     }
     .hero-grid {
-      display: grid;
-      grid-template-columns: 1.3fr .7fr;
-      gap: 28px;
-      align-items: start;
-    }
-    .kicker {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 8px 14px; border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: var(--muted); font-weight: 650; font-size: 13px;
-    }
-    h1 {
-      margin: 18px 0 0;
-      font-size: clamp(36px, 5vw, 58px);
-      line-height: 1.06;
-      letter-spacing: -1px;
-    }
-    h1 em {
-      font-style: italic;
-      background: linear-gradient(135deg, var(--shopops-blue), var(--shopops-purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .lead {
-      margin: 20px 0 0;
-      color: var(--muted);
-      font-size: clamp(17px, 2.1vw, 20px);
-      line-height: 1.55;
-      max-width: 62ch;
-    }
-    .hero-actions { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
-
-    .journey-panel {
-      padding: 24px;
-      border-radius: var(--radius);
-      border: 1px solid rgba(59,130,246,.25);
-      background: rgba(59,130,246,.06);
-      box-shadow: var(--shadow);
-    }
-    .journey-label {
-      font-size: 13px;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--shopops-blue);
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-    .journey-step {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    .journey-step:last-child { border-bottom: none; }
-    .journey-num {
-      flex-shrink: 0;
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--shopops-blue), var(--shopops-purple));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 13px;
-      color: var(--white);
-    }
-    .journey-content {
-      flex: 1;
-    }
-    .journey-title {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: var(--text);
-    }
-    .journey-desc {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-    .journey-tagline {
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,.12);
-      font-size: 14px;
-      font-weight: 650;
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    section { padding: 40px 0; }
-    .section-head {
-      margin-bottom: 28px;
-    }
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(26px, 3.2vw, 38px);
-      letter-spacing: -.5px;
-      line-height: 1.15;
-    }
-    .section-head p {
-      margin: 14px 0 0;
-      color: var(--muted);
-      font-size: 17px;
-      line-height: 1.65;
-      max-width: 68ch;
+      display: grid; gap: 2.5rem; align-items: center;
+      grid-template-columns: 1.15fr 0.85fr;
     }
     .eyebrow {
-      font-size: 12px;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--shopops-blue);
-      font-weight: 700;
-      margin-bottom: 12px;
+      display: inline-block; font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #93c5fd; margin-bottom: 0.85rem;
     }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
+    .hero h1 {
+      font-size: clamp(2.1rem, 4.2vw, 3.15rem);
+      line-height: 1.08; letter-spacing: -0.03em;
+      margin-bottom: 1rem; font-weight: 700;
     }
-    .phase-card {
-      padding: 24px;
+    .hero-tagline {
+      font-size: clamp(1.15rem, 2vw, 1.4rem);
+      color: #bfdbfe; font-weight: 500; margin-bottom: 1rem;
+    }
+    .hero-positioning {
+      font-size: 1.05rem; color: rgba(255,255,255,0.82);
+      max-width: 36rem; margin-bottom: 1.75rem;
+    }
+    .hero-positioning strong { color: #fff; font-weight: 600; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .hero-shot {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
       border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      transition: transform .15s ease, border-color .2s ease, background .2s ease;
-    }
-    .phase-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,.18);
-      background: rgba(255,255,255,.08);
-    }
-    .phase-num {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(59,130,246,.3), rgba(139,92,246,.2));
-      border: 1px solid rgba(59,130,246,.35);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .1em;
-      color: var(--shopops-blue);
-      margin-bottom: 12px;
-    }
-    .phase-card h3 {
-      margin: 0 0 10px;
-      font-size: 20px;
-      letter-spacing: -.3px;
-    }
-    .phase-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.65;
-    }
-    .phase-list {
-      margin: 14px 0 0;
-      padding: 0;
-      list-style: none;
-    }
-    .phase-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      margin: 8px 0;
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-    .phase-list li::before {
-      content: '→';
-      color: var(--shopops-blue);
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .accent-1 { box-shadow: 0 0 0 1px rgba(59,130,246,.25) inset; }
-    .accent-2 { box-shadow: 0 0 0 1px rgba(139,92,246,.22) inset; }
-    .accent-3 { box-shadow: 0 0 0 1px rgba(34,211,238,.20) inset; }
-    .accent-4 { box-shadow: 0 0 0 1px rgba(52,211,153,.18) inset; }
-
-    .bridge-section {
-      margin-top: 48px;
-    }
-    .bridge-title {
-      font-size: clamp(24px, 2.8vw, 34px);
-      letter-spacing: -.4px;
-      line-height: 1.2;
-      margin-bottom: 28px;
-      text-align: center;
-    }
-    .bridge-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-    .bridge-card {
-      padding: 26px;
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      box-shadow: var(--shadow);
-      transition: transform .15s ease, border-color .2s ease;
-    }
-    .bridge-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,.20);
-    }
-    .bridge-label {
-      font-size: 11px;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--shopops-blue);
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-    .bridge-card h3 {
-      margin: 0 0 12px;
-      font-size: 22px;
-      letter-spacing: -.3px;
-    }
-    .bridge-card ul {
-      margin: 0;
-      padding-left: 20px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.7;
-    }
-    .bridge-card ul li {
-      margin: 8px 0;
-    }
-    .bridge-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 14px;
-      font-size: 14px;
-      font-weight: 650;
-      color: var(--shopops-blue);
-      transition: color .2s ease;
-    }
-    .bridge-link:hover {
-      color: var(--text);
-    }
-
-    .cta-box {
-      border-radius: 30px;
-      border: 1px solid rgba(255,255,255,.14);
-      background:
-        radial-gradient(900px 320px at 20% 20%, rgba(124,58,237,.28), transparent 60%),
-        radial-gradient(900px 320px at 85% 35%, rgba(34,211,238,.18), transparent 55%),
-        rgba(255,255,255,.06);
-      box-shadow: var(--shadow);
+      padding: 0.65rem; box-shadow: var(--shadow);
       overflow: hidden;
     }
-    .cta-inner {
-      padding: 32px 28px;
+    .hero-shot img {
+      border-radius: 10px; width: 100%;
+      background: var(--navy-mid);
+      min-height: 180px; object-fit: cover; object-position: top left;
     }
-    .cta-inner h2 {
-      margin: 0;
-      font-size: clamp(24px, 3vw, 34px);
-      letter-spacing: -.4px;
-      line-height: 1.15;
+    .hero-shot figcaption {
+      font-size: 0.8rem; color: rgba(255,255,255,0.65);
+      padding: 0.55rem 0.35rem 0.15rem;
     }
-    .cta-inner > p {
-      margin: 14px 0 0;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.65;
-      max-width: 70ch;
-    }
-    .cta-actions { margin-top: 22px; display: flex; gap: 12px; flex-wrap: wrap; }
 
+    /* Sections */
+    section { padding: 4.25rem 0; }
+    .section-head { max-width: 40rem; margin-bottom: 2.25rem; }
+    .section-head h2 {
+      font-size: clamp(1.65rem, 3vw, 2.2rem);
+      letter-spacing: -0.025em; line-height: 1.15;
+      color: var(--navy); margin-bottom: 0.75rem;
+    }
+    .section-sub { color: var(--muted); font-size: 1.05rem; }
+    .band-mist { background: var(--mist); }
+    .band-sky { background: var(--sky); }
+    .band-navy {
+      background: linear-gradient(160deg, var(--navy-deep), var(--navy));
+      color: var(--white);
+    }
+    .band-navy .section-head h2 { color: var(--white); }
+    .band-navy .section-sub { color: rgba(255,255,255,0.75); }
+    .band-navy .eyebrow { color: #93c5fd; }
+
+    /* Problem */
+    .problem-grid {
+      display: grid; gap: 1rem;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .problem-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.25rem;
+    }
+    .problem-card h3 {
+      font-size: 1.05rem; color: var(--navy);
+      margin-bottom: 0.45rem;
+    }
+    .problem-card p { color: var(--muted); font-size: 0.95rem; }
+    .funnel-chip-row {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-top: 1.75rem;
+    }
+    .chip {
+      font-size: 0.78rem; font-weight: 600;
+      padding: 0.35rem 0.7rem; border-radius: 999px;
+      background: var(--sky); color: var(--navy-mid);
+      border: 1px solid #c7daf0;
+    }
+    .chip-gap {
+      background: #fff7ed; color: var(--warn); border-color: #fed7aa;
+    }
+
+    /* Journey */
+    .journey-list { display: flex; flex-direction: column; gap: 2.75rem; }
+    .journey-item {
+      display: grid; gap: 1.5rem; align-items: center;
+      grid-template-columns: 1fr 1.35fr;
+    }
+    .journey-item:nth-child(even) { grid-template-columns: 1.35fr 1fr; }
+    .journey-item:nth-child(even) .journey-copy { order: 2; }
+    .journey-item:nth-child(even) .journey-media { order: 1; }
+    .step-num {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
+    }
+    .journey-copy h3 {
+      font-size: 1.35rem; color: var(--navy);
+      letter-spacing: -0.02em; margin-bottom: 0.5rem;
+    }
+    .journey-copy p { color: var(--muted); margin-bottom: 0.85rem; }
+    .dual {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .pill {
+      font-size: 0.78rem; font-weight: 600;
+      padding: 0.3rem 0.65rem; border-radius: 999px;
+    }
+    .pill-rev { background: #dbeafe; color: #1e40af; }
+    .pill-trust { background: #ccfbf1; color: #0f766e; }
+    .shot-frame {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 0.55rem;
+      box-shadow: var(--shadow);
+    }
+    .shot-frame img {
+      border-radius: 10px;
+      width: 100%;
+      background: #e2e8f0;
+      min-height: 160px;
+      object-fit: cover;
+      object-position: top left;
+    }
+    .shot-frame figcaption {
+      font-size: 0.82rem; color: var(--muted);
+      padding: 0.55rem 0.35rem 0.2rem;
+    }
+
+    /* Feature grids */
+    .feature-grid {
+      display: grid; gap: 1.25rem;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(11, 31, 58, 0.06);
+    }
+    .feature-card .shot-frame {
+      border: none; border-radius: 0; box-shadow: none;
+      border-bottom: 1px solid var(--line);
+    }
+    .feature-body { padding: 1.15rem 1.2rem 1.35rem; }
+    .feature-body h3 {
+      font-size: 1.1rem; color: var(--navy); margin-bottom: 0.35rem;
+    }
+    .feature-body p { color: var(--muted); font-size: 0.95rem; }
+
+    .pulse-grid {
+      display: grid; gap: 1.25rem;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .pulse-grid .feature-card:first-child {
+      grid-column: 1 / -1;
+    }
+    .band-navy .feature-card {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.12);
+    }
+    .band-navy .feature-body h3 { color: var(--white); }
+    .band-navy .feature-body p { color: rgba(255,255,255,0.72); }
+    .band-navy .shot-frame { background: transparent; }
+    .band-navy .shot-frame figcaption { color: rgba(255,255,255,0.55); }
+    .band-navy .feature-card .shot-frame {
+      border-bottom-color: rgba(255,255,255,0.1);
+    }
+
+    /* Positioning strip */
+    .position-strip {
+      display: grid; gap: 1rem;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: stretch;
+      margin-top: 0.5rem;
+    }
+    .pos-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.3rem;
+    }
+    .pos-card .label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
+    }
+    .pos-card h3 { font-size: 1.2rem; color: var(--navy); margin-bottom: 0.4rem; }
+    .pos-card p { color: var(--muted); font-size: 0.95rem; }
+    .pos-vs {
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: var(--muted); font-size: 0.85rem;
+    }
+
+    /* CTA */
+    .cta {
+      text-align: center; padding: 4.5rem 0;
+      background:
+        radial-gradient(ellipse 70% 80% at 50% 0%, rgba(59,130,246,0.18), transparent 60%),
+        var(--mist);
+    }
+    .cta h2 {
+      font-size: clamp(1.7rem, 3vw, 2.3rem);
+      color: var(--navy); letter-spacing: -0.025em;
+      margin-bottom: 0.65rem;
+    }
+    .cta p {
+      color: var(--muted); max-width: 32rem;
+      margin: 0 auto 1.5rem; font-size: 1.05rem;
+    }
+    .cta-actions {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 0.75rem;
+    }
+
+    /* Footer */
     footer {
       border-top: 1px solid var(--line);
-      padding: 22px 0 32px;
-      color: var(--muted);
-      font-size: 13px;
+      padding: 1.5rem 0 2rem;
+      color: var(--muted); font-size: 0.88rem;
     }
-    .foot {
-      display: flex;
-      justify-content: space-between;
+    .footer-inner {
+      display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
       align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
     }
-    .foot a:hover { color: var(--text); }
 
-    @media (max-width: 980px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .grid-2, .bridge-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 560px) {
-      .nav-links { display: none; }
-      .btn { width: 100%; justify-content: center; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      * { transition: none !important; scroll-behavior: auto !important; }
+    /* Mobile */
+    @media (max-width: 900px) {
+      .hero-grid,
+      .journey-item,
+      .journey-item:nth-child(even),
+      .problem-grid,
+      .feature-grid,
+      .pulse-grid,
+      .position-strip {
+        grid-template-columns: 1fr;
+      }
+      .journey-item:nth-child(even) .journey-copy,
+      .journey-item:nth-child(even) .journey-media { order: initial; }
+      .pulse-grid .feature-card:first-child { grid-column: auto; }
+      .pos-vs { padding: 0.25rem 0; }
+      .nav a:not(.nav-cta) { display: none; }
     }
   </style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="wrap">
-      <div class="nav-inner">
-        <a href="index.html" class="brand">
-          <span class="mark" aria-hidden="true"></span>
-          <span>Amplified IQ</span>
-        </a>
-        <div class="nav-links">
-          <a href="#journey">Sell more</a>
-          <a href="shopops-workflow.html">Shop workflow</a>
-          <a href="shopops-financials.html">Owner financials</a>
-          <a href="mailto:hello@amplifiediq.ai?subject=ShopOps%20Demo" class="btn primary">Request a demo</a>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <header id="top" class="hero">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div>
-          <div class="kicker">For AAMCO & auto repair operators</div>
-          <h1>Sell more — <em>from call to pickup</em></h1>
-          <p class="lead">
-            ShopOps is the sales system built for your service advisors—from the first call to pickup. Capture every opportunity, get vehicles on the calendar, and close with confidence.
-          </p>
-          <div class="hero-actions">
-            <a class="btn primary" href="mailto:hello@amplifiediq.ai?subject=ShopOps%20Demo">Request a demo</a>
-            <a class="btn" href="index.html">Back to Amplified IQ</a>
-          </div>
-        </div>
-
-        <aside class="journey-panel">
-          <div class="journey-label">Customer's journey</div>
-          
-          <div class="journey-step">
-            <div class="journey-num">01</div>
-            <div class="journey-content">
-              <div class="journey-title">Intake</div>
-              <div class="journey-desc">Get the vehicle on the calendar</div>
-            </div>
-          </div>
-
-          <div class="journey-step">
-            <div class="journey-num">02</div>
-            <div class="journey-content">
-              <div class="journey-title">Arrival</div>
-              <div class="journey-desc">Protect the sale at drop-off</div>
-            </div>
-          </div>
-
-          <div class="journey-step">
-            <div class="journey-num">03</div>
-            <div class="journey-content">
-              <div class="journey-title">Estimates</div>
-              <div class="journey-desc">Turn quotes into paying customers</div>
-            </div>
-          </div>
-
-          <div class="journey-step">
-            <div class="journey-num">04</div>
-            <div class="journey-content">
-              <div class="journey-title">Pickup</div>
-              <div class="journey-desc">Today's visit → tomorrow's sales</div>
-            </div>
-          </div>
-
-          <div class="journey-tagline">
-            Every step improves the customer experience — and helps you sell more
-          </div>
-        </aside>
-      </div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#top" aria-label="ShopOps home">
+        <span class="logo-mark" aria-hidden="true"></span>
+        ShopOps
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#problem">The gaps</a>
+        <a href="#journey">Journey</a>
+        <a href="#cracks">Nothing drops</a>
+        <a href="#pulse">Leadership pulse</a>
+        <a href="#cta" class="nav-cta">Book a walkthrough</a>
+      </nav>
     </div>
   </header>
 
-  <section id="journey">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">The customer's journey</p>
-        <h2>Four phases. Better experience. More sold work.</h2>
-        <p>
-          Every step of the sales process in ShopOps improves the customer experience.
-        </p>
-      </div>
-
-      <div class="grid-2">
-        <article class="phase-card accent-1">
-          <span class="phase-num">01 INTAKE</span>
-          <h3>Get the vehicle on the calendar</h3>
-          <ul class="phase-list">
-            <li>Capture every call & walk-in</li>
-            <li>CSM prompted through key selling points</li>
-            <li>Nothing skipped in the conversation</li>
-          </ul>
-        </article>
-
-        <article class="phase-card accent-2">
-          <span class="phase-num">02 ARRIVAL</span>
-          <h3>Protect the sale at drop-off</h3>
-          <ul class="phase-list">
-            <li>Guided process when the vehicle arrives</li>
-            <li>Surface add-on opportunities early</li>
-            <li>Keep the booked work locked in</li>
-          </ul>
-        </article>
-
-        <article class="phase-card accent-3">
-          <span class="phase-num">03 ESTIMATES</span>
-          <h3>Turn quotes into paying customers</h3>
-          <ul class="phase-list">
-            <li>Selling points at the moment of recommend</li>
-            <li>Talking points to work the close</li>
-            <li>Estimates that convert, not just inform</li>
-          </ul>
-        </article>
-
-        <article class="phase-card accent-4">
-          <span class="phase-num">04 PICKUP</span>
-          <h3>Today's visit → tomorrow's sales</h3>
-          <ul class="phase-list">
-            <li>Guided handoff at pickup</li>
-            <li>Openings for follow-up services</li>
-            <li>Customers who come back ready to buy</li>
-          </ul>
-        </article>
-      </div>
-
-      <div class="bridge-section">
-        <h2 class="bridge-title">Sold work that stays profitable</h2>
-        
-        <div class="bridge-grid">
-          <div class="bridge-card">
-            <div class="bridge-label">→ Shop workflow</div>
-            <h3>Sold work flows through the bay</h3>
-            <ul>
-              <li>Tools to manage shop workflow</li>
-              <li>Technician time on each RO</li>
-              <li>Keep every sold job moving</li>
-            </ul>
-            <a href="shopops-workflow.html" class="bridge-link">
-              Learn more →
-            </a>
-          </div>
-
-          <div class="bridge-card">
-            <div class="bridge-label">→ Owner financials</div>
-            <h3>Performance visibility + what-if profit</h3>
-            <ul>
-              <li>Financial performance for the owner</li>
-              <li>See where improvements are needed</li>
-              <li>What-if scenarios going forward</li>
-            </ul>
-            <a href="shopops-financials.html" class="bridge-link">
-              Learn more →
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" style="padding: 48px 0 64px;">
-    <div class="wrap">
-      <div class="cta-box">
-        <div class="cta-inner">
-          <h2>Sell more. Deliver it. Improve from there.</h2>
-          <p>
-            ShopOps connects counter sales, shop workflow, and owner financials—so the work you sell gets through the shop and stays profitable.
+  <main id="top">
+    <!-- 1. Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">ShopOps · System of operations</p>
+          <h1 id="hero-title">Cars in. Cars out.<br />Nothing lost in between.</h1>
+          <p class="hero-tagline">Revenue and customer trust — built along the full journey through the shop.</p>
+          <p class="hero-positioning">
+            <strong>AMS is the system of record.</strong>
+            ShopOps is the system of operations — so your people run the day,
+            customers feel taken care of, and you always know what’s going on.
           </p>
-          <div class="cta-actions">
-            <a class="btn primary" href="mailto:hello@amplifiediq.ai?subject=ShopOps%20Demo">Request a demo</a>
-            <a class="btn" href="index.html">Learn about Amplified IQ</a>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#cta">Book a walkthrough</a>
+            <a class="btn btn-ghost" href="#journey">See it live</a>
           </div>
         </div>
+        <figure class="hero-shot">
+          <img src="images/Marketing.png" alt="ShopOps marketing and campaign view" width="960" height="600" />
+          <figcaption>From the first dollar of marketing spend to the last thank-you at pickup.</figcaption>
+        </figure>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- Positioning -->
+    <section aria-labelledby="position-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow" style="color: var(--accent);">Locked positioning</p>
+          <h2 id="position-title">Two systems. One shop. Clear job for each.</h2>
+          <p class="section-sub">Don’t replace what already works. Put operations on top of the record.</p>
+        </div>
+        <div class="position-strip">
+          <article class="pos-card">
+            <p class="label">System of record</p>
+            <h3>AMS</h3>
+            <p>Where the RO, payments, and official shop history live. Source of truth for what happened.</p>
+          </article>
+          <div class="pos-vs" aria-hidden="true">+</div>
+          <article class="pos-card">
+            <p class="label">System of operations</p>
+            <h3>ShopOps</h3>
+            <p>How the day runs — calls, leads, appointments, VCC, estimates, sold work, follow-ups, and the owner’s pulse.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Problem -->
+    <section id="problem" class="band-mist" aria-labelledby="problem-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow" style="color: var(--accent);">The real leak</p>
+          <h2 id="problem-title">Cars and trust get lost in the gaps.</h2>
+          <p class="section-sub">
+            Not because people don’t care — because the handoffs are thin.
+            Marketing to call to lead to appointment to VCC to estimate to paid RO to workflow to pickup to review.
+            Every gap is a place a car (or a relationship) slips away.
+          </p>
+        </div>
+        <div class="problem-grid">
+          <article class="problem-card">
+            <h3>Revenue leaks at handoffs</h3>
+            <p>Missed callbacks, soft appointments, estimates that never close, sold work that doesn’t get scheduled cleanly.</p>
+          </article>
+          <article class="problem-card">
+            <h3>Trust erodes in silence</h3>
+            <p>Customer didn’t hear back. Status unclear. Surprise at pickup. That’s how good shops still get average reviews.</p>
+          </article>
+          <article class="problem-card">
+            <h3>Leadership flies blind</h3>
+            <p>You find out late. Spreadsheets and gut feel instead of a live pulse on conversion, cash, and capacity.</p>
+          </article>
+        </div>
+        <div class="funnel-chip-row" aria-label="Customer journey stages">
+          <span class="chip">Marketing</span><span class="chip-gap chip">gap</span>
+          <span class="chip">Call</span><span class="chip-gap chip">gap</span>
+          <span class="chip">Lead</span><span class="chip-gap chip">gap</span>
+          <span class="chip">Appointment</span><span class="chip-gap chip">gap</span>
+          <span class="chip">Arrival</span><span class="chip-gap chip">gap</span>
+          <span class="chip">VCC</span><span class="chip-gap chip">gap</span>
+          <span class="chip">Estimate</span><span class="chip-gap chip">gap</span>
+          <span class="chip">Paid RO</span><span class="chip-gap chip">gap</span>
+          <span class="chip">Workflow</span><span class="chip-gap chip">gap</span>
+          <span class="chip">Pickup</span><span class="chip-gap chip">gap</span>
+          <span class="chip">Review / referral</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Journey strip -->
+    <section id="journey" aria-labelledby="journey-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow" style="color: var(--accent);">Full customer journey</p>
+          <h2 id="journey-title">Every stage builds revenue and trust.</h2>
+          <p class="section-sub">ShopOps sits with your team at each step — so the next step actually happens.</p>
+        </div>
+
+        <div class="journey-list">
+          <article class="journey-item">
+            <div class="journey-copy">
+              <p class="step-num">01 · Marketing</p>
+              <h3>Know which spend puts cars on the board</h3>
+              <p>Campaigns, calls, and booked work stay connected. You’re not guessing which ads filled the bay.</p>
+              <div class="dual">
+                <span class="pill pill-rev">Revenue</span>
+                <span class="pill pill-trust">Trust starts with the right promise</span>
+              </div>
+            </div>
+            <figure class="journey-media shot-frame">
+              <img src="images/Marketing.png" alt="ShopOps marketing dashboard" />
+              <figcaption>Marketing — spend tied to leads and showed work</figcaption>
+            </figure>
+          </article>
+
+          <article class="journey-item">
+            <div class="journey-copy">
+              <p class="step-num">02 · Calls</p>
+              <h3>Every call gets coached to a next step</h3>
+              <p>Inbound and outbound aren’t a black hole. Your CSM has the prompts; the shop keeps the thread.</p>
+              <div class="dual">
+                <span class="pill pill-rev">More booked conversations</span>
+                <span class="pill pill-trust">Customer feels heard on the phone</span>
+              </div>
+            </div>
+            <figure class="journey-media shot-frame">
+              <img src="images/Calls.png" alt="ShopOps call coaching" />
+              <figcaption>Calls — guided conversations, not winging it</figcaption>
+            </figure>
+          </article>
+
+          <article class="journey-item">
+            <div class="journey-copy">
+              <p class="step-num">03 · Leads</p>
+              <h3>Leads don’t die in a list</h3>
+              <p>Who owns it, what’s next, when to follow up. Soft leads get worked before they go cold.</p>
+              <div class="dual">
+                <span class="pill pill-rev">Higher show / convert</span>
+                <span class="pill pill-trust">Follow-up that respects their time</span>
+              </div>
+            </div>
+            <figure class="journey-media shot-frame">
+              <img src="images/Leads.png" alt="ShopOps leads board" />
+              <figcaption>Leads — ownership and next action visible</figcaption>
+            </figure>
+          </article>
+
+          <article class="journey-item">
+            <div class="journey-copy">
+              <p class="step-num">04 · Appointments</p>
+              <h3>Calendar that the floor can trust</h3>
+              <p>Confirmations, capacity, and “are they really coming?” — before the morning scramble.</p>
+              <div class="dual">
+                <span class="pill pill-rev">Fewer no-shows</span>
+                <span class="pill pill-trust">Clear expectations before arrival</span>
+              </div>
+            </div>
+            <figure class="journey-media shot-frame">
+              <img src="images/Appointments.png" alt="ShopOps appointments calendar" />
+              <figcaption>Appointments — the day planned, not hoped for</figcaption>
+            </figure>
+          </article>
+
+          <article class="journey-item">
+            <div class="journey-copy">
+              <p class="step-num">05 · Arrival</p>
+              <h3>Walk-in to write-up without the scramble</h3>
+              <p>Customer history, vehicle, and reason for visit are ready. Intake feels professional, not chaotic.</p>
+              <div class="dual">
+                <span class="pill pill-rev">Faster to a real RO</span>
+                <span class="pill pill-trust">First impression of a sharp shop</span>
+              </div>
+            </div>
+            <figure class="journey-media shot-frame">
+              <img src="images/Arrival.png" alt="ShopOps arrival and intake" />
+              <figcaption>Arrival — ready when they walk in</figcaption>
+            </figure>
+          </article>
+
+          <article class="journey-item">
+            <div class="journey-copy">
+              <p class="step-num">06 · VCC</p>
+              <h3>Vehicle condition that sells the truth</h3>
+              <p>Findings captured cleanly so the estimate conversation starts from facts, not memory.</p>
+              <div class="dual">
+                <span class="pill pill-rev">Stronger estimate foundation</span>
+                <span class="pill pill-trust">Transparency builds buy-in</span>
+              </div>
+            </div>
+            <figure class="journey-media shot-frame">
+              <img src="images/VCC.png" alt="ShopOps vehicle condition check" />
+              <figcaption>VCC — condition documented, not guessed</figcaption>
+            </figure>
+          </article>
+
+          <article class="journey-item">
+            <div class="journey-copy">
+              <p class="step-num">07 · Estimates</p>
+              <h3>Present, coach objections, close</h3>
+              <p>Options, pricing discipline, and what to say when they hesitate — so good work gets approved.</p>
+              <div class="dual">
+                <span class="pill pill-rev">Higher close rate</span>
+                <span class="pill pill-trust">No pressure theater — clear choices</span>
+              </div>
+            </div>
+            <figure class="journey-media shot-frame">
+              <img src="images/Estimates.png" alt="ShopOps estimates and coaching" />
+              <figcaption>Estimates — present and close with coaching</figcaption>
+            </figure>
+          </article>
+
+          <article class="journey-item">
+            <div class="journey-copy">
+              <p class="step-num">08 · Upsell done right</p>
+              <h3>Recommend what the car needs — not junk</h3>
+              <p>Related work surfaces when it belongs. Customers feel advised, not upsold randomly.</p>
+              <div class="dual">
+                <span class="pill pill-rev">Ticket integrity</span>
+                <span class="pill pill-trust">Advice they can believe</span>
+              </div>
+            </div>
+            <figure class="journey-media shot-frame">
+              <img src="images/UpSell.png" alt="ShopOps upsell recommendations" />
+              <figcaption>Upsell — relevant recommendations only</figcaption>
+            </figure>
+          </article>
+
+          <article class="journey-item">
+            <div class="journey-copy">
+              <p class="step-num">09 · Paid ROs</p>
+              <h3>Approved work becomes scheduled work</h3>
+              <p>Sold is not done. Paid ROs move into the floor plan instead of sitting in limbo.</p>
+              <div class="dual">
+                <span class="pill pill-rev">Cash and throughput</span>
+                <span class="pill pill-trust">They know their car is in motion</span>
+              </div>
+            </div>
+            <figure class="journey-media shot-frame">
+              <img src="images/Paid-ROs.png" alt="ShopOps paid repair orders" />
+              <figcaption>Paid ROs — sold work that actually runs</figcaption>
+            </figure>
+          </article>
+
+          <article class="journey-item">
+            <div class="journey-copy">
+              <p class="step-num">10 · Workflows</p>
+              <h3>The floor knows what’s next</h3>
+              <p>Status, blockers, and tech time stay visible. Less chasing. More finishing.</p>
+              <div class="dual">
+                <span class="pill pill-rev">Cars out on time</span>
+                <span class="pill pill-trust">Updates you can stand behind</span>
+              </div>
+            </div>
+            <figure class="journey-media shot-frame">
+              <img src="images/Workflows.png" alt="ShopOps shop floor workflows" />
+              <figcaption>Workflows — the day under control</figcaption>
+            </figure>
+          </article>
+
+          <article class="journey-item">
+            <div class="journey-copy">
+              <p class="step-num">11 · Pickup → next sale</p>
+              <h3>Deliver the car. Keep the relationship.</h3>
+              <p>Pickup done clean, review asked for, next service on the radar. One happy handoff turns into the next RO.</p>
+              <div class="dual">
+                <span class="pill pill-rev">Repeat &amp; referral</span>
+                <span class="pill pill-trust">They leave confident — and come back</span>
+              </div>
+            </div>
+            <figure class="journey-media shot-frame">
+              <img src="images/Pickup-Next-Sales.png" alt="ShopOps pickup and next sales" />
+              <figcaption>Pickup — close the loop, open the next one</figcaption>
+            </figure>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Nothing falls through the cracks -->
+    <section id="cracks" class="band-sky" aria-labelledby="cracks-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow" style="color: var(--accent);">Nothing drops through the cracks</p>
+          <h2 id="cracks-title">The shop remembers — so customers don’t have to chase you.</h2>
+          <p class="section-sub">Gaps get caught early. Follow-ups don’t rely on sticky notes. Surprises get killed before pickup.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <figure class="shot-frame">
+              <img src="images/Catch-The-Gaps.png" alt="ShopOps catching operational gaps" />
+              <figcaption>Catch the gaps</figcaption>
+            </figure>
+            <div class="feature-body">
+              <h3>Catch the gaps</h3>
+              <p>See where cars stall between stages — before a lead goes cold or a paid RO sits untouched.</p>
+            </div>
+          </article>
+          <article class="feature-card">
+            <figure class="shot-frame">
+              <img src="images/Dont-Forget.png" alt="ShopOps reminders and follow-ups" />
+              <figcaption>Don’t forget</figcaption>
+            </figure>
+            <div class="feature-body">
+              <h3>Don’t forget</h3>
+              <p>Callbacks, parts, promises, deferred work — prompted so the team doesn’t have to keep it all in their head.</p>
+            </div>
+          </article>
+          <article class="feature-card">
+            <figure class="shot-frame">
+              <img src="images/No-Surprises.png" alt="ShopOps no surprises at pickup" />
+              <figcaption>No surprises</figcaption>
+            </figure>
+            <div class="feature-body">
+              <h3>No surprises</h3>
+              <p>Status and approvals stay clear. Pickup is a confirmation, not a confrontation.</p>
+            </div>
+          </article>
+          <article class="feature-card">
+            <figure class="shot-frame">
+              <img src="images/Know-Your-Customer.png" alt="ShopOps customer context" />
+              <figcaption>Know your customer</figcaption>
+            </figure>
+            <div class="feature-body">
+              <h3>Know your customer</h3>
+              <p>History, preferences, and open loops ride with the car — so every conversation starts mid-sentence, not from zero.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Leadership pulse -->
+    <section id="pulse" class="band-navy" aria-labelledby="pulse-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Leadership pulse</p>
+          <h2 id="pulse-title">Always know what’s going on.</h2>
+          <p class="section-sub">Owners and multi-shop leadership get the pulse of the business — without living in a spreadsheet.</p>
+        </div>
+        <div class="pulse-grid">
+          <article class="feature-card">
+            <figure class="shot-frame">
+              <img src="images/Finger-On-The-Pulse.png" alt="ShopOps leadership pulse dashboard" />
+              <figcaption>Finger on the pulse</figcaption>
+            </figure>
+            <div class="feature-body">
+              <h3>Finger on the pulse</h3>
+              <p>Today’s flow — calls, shows, approvals, cars in process — in one place you can trust at a glance.</p>
+            </div>
+          </article>
+          <article class="feature-card">
+            <figure class="shot-frame">
+              <img src="images/Know-Your-Numbers.png" alt="ShopOps key numbers view" />
+              <figcaption>Know your numbers</figcaption>
+            </figure>
+            <div class="feature-body">
+              <h3>Know your numbers</h3>
+              <p>The operating numbers that matter for running the shop — visible without waiting on month-end.</p>
+            </div>
+          </article>
+          <article class="feature-card">
+            <figure class="shot-frame">
+              <img src="images/Know-The-Math.png" alt="ShopOps conversion and margin math" />
+              <figcaption>Know the math</figcaption>
+            </figure>
+            <div class="feature-body">
+              <h3>Know the math</h3>
+              <p>Conversion and mix aren’t mysteries. See where the funnel pays and where it leaks.</p>
+            </div>
+          </article>
+          <article class="feature-card">
+            <figure class="shot-frame">
+              <img src="images/What-If.png" alt="ShopOps what-if scenarios" />
+              <figcaption>What if</figcaption>
+            </figure>
+            <div class="feature-body">
+              <h3>What if</h3>
+              <p>Play with scenarios before you change staffing, pricing posture, or capacity — then decide with eyes open.</p>
+            </div>
+          </article>
+          <article class="feature-card">
+            <figure class="shot-frame">
+              <img src="images/Maximize-Your-Team.png" alt="ShopOps team performance view" />
+              <figcaption>Maximize your team</figcaption>
+            </figure>
+            <div class="feature-body">
+              <h3>Maximize your team</h3>
+              <p>See who is carrying the day and where coaching helps — without hovering over every RO.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Closing CTA -->
+    <section id="cta" class="cta" aria-labelledby="cta-title">
+      <div class="container">
+        <p class="eyebrow" style="color: var(--accent);">Next step</p>
+        <h2 id="cta-title">See ShopOps on your shop’s journey.</h2>
+        <p>
+          We’ll walk the path from marketing to pickup — gaps, pulse, and all —
+          and show how AMS stays the record while ShopOps runs the day.
+        </p>
+        <div class="cta-actions">
+          <a class="btn btn-dark" href="mailto:britt.fogg@amplifiediq.ai?subject=ShopOps%20walkthrough">Book a walkthrough</a>
+          <a class="btn btn-outline" href="#journey">See it live</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <div class="wrap">
-      <div class="foot">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="width: 22px; height: 22px; border-radius: 10px; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 40%), linear-gradient(135deg, rgba(59,130,246,.95), rgba(139,92,246,.85)); box-shadow: 0 8px 20px rgba(59,130,246,.2); border: 1px solid rgba(255,255,255,.14);" aria-hidden="true"></span>
-          <span>© <span id="y"></span> AmplifiedIQ.ai</span>
-        </div>
-        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
-          <a href="index.html">Home</a>
-          <a href="agmodel.html">AgModel</a>
-          <a href="shopops.html">ShopOps</a>
-          <a href="operating-system.html">AmpIQ OS</a>
-          <a href="sales-planning.html">SalesPlanIQ</a>
-          <a href="time-back.html">Time back</a>
-          <a href="mailto:hello@amplifiediq.ai">hello@amplifiediq.ai</a>
-        </div>
-      </div>
+    <div class="container footer-inner">
+      <p><strong style="color: var(--navy);">ShopOps</strong> — AMS is the system of record. ShopOps is the system of operations.</p>
+      <p>Cars in. Cars out. Nothing lost in between.</p>
     </div>
   </footer>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    document.addEventListener('click', function (e) {
-      var a = e.target.closest('a[href]');
-      if (!a) return;
-      var href = a.getAttribute('href') || '';
-
-      if (/^mailto:/i.test(href)) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        window.location.href = href;
-        return;
-      }
-
-      if (href.charAt(0) !== '#' || href === '#') return;
-      var el = document.getElementById(href.slice(1));
-      if (!el) return;
-      e.preventDefault();
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      history.pushState(null, '', href);
-    }, true);
-  </script>
 </body>
 </html>
