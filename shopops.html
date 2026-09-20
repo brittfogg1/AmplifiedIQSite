@@ -245,6 +245,19 @@
       object-fit: contain;
       background: transparent;
     }
+    .journey-media.shot-pair {
+      display: grid;
+      grid-template-columns: 2.1fr 1fr;
+      gap: 0.75rem;
+      align-items: start;
+    }
+    .shot-pair .shot-frame { min-width: 0; }
+    .shot-pair .shot-frame img {
+      min-height: 0;
+      object-fit: contain;
+      object-position: top center;
+      background: #f8fafc;
+    }
 
     /* Feature grids */
     .feature-grid {
@@ -371,6 +384,11 @@
       .pos-vs { padding: 0.25rem 0; }
       .nav a:not(.nav-cta) { display: none; }
       .shot-hangtag { justify-self: center; }
+      .journey-media.shot-pair { grid-template-columns: 1fr; }
+      .shot-pair .shot-timeclock {
+        max-width: 240px;
+        justify-self: center;
+      }
     }
   </style>
 </head>
@@ -640,16 +658,22 @@
             <div class="journey-copy">
               <p class="step-num">10 · Workflows</p>
               <h3>The floor knows what’s next</h3>
-              <p>Status, blockers, and tech time stay visible. Less chasing. More finishing.</p>
+              <p>Status, blockers, and who’s on what stay on the board. Techs clock in on the repair order — so leadership knows where the tech time is going, not just that the car is in a column. Less chasing. More finishing.</p>
               <div class="dual">
                 <span class="pill pill-rev">Cars out on time</span>
-                <span class="pill pill-trust">Updates you can stand behind</span>
+                <span class="pill pill-trust">Hours leadership can see</span>
               </div>
             </div>
-            <figure class="journey-media shot-frame">
-              <img src="images/Workflows.png" alt="ShopOps shop floor workflows" />
-              <figcaption>Workflows — the day under control</figcaption>
-            </figure>
+            <div class="journey-media shot-pair">
+              <figure class="shot-frame">
+                <img src="images/Workflows.png" alt="ShopOps shop floor workflows" />
+                <figcaption>Workflows — the day under control</figcaption>
+              </figure>
+              <figure class="shot-frame shot-timeclock">
+                <img src="images/Timeclock.png" alt="ShopOps timeclock for clocking in on a repair order" />
+                <figcaption>Timeclock — hours on the right RO</figcaption>
+              </figure>
+            </div>
           </article>
 
           <article class="journey-item">
