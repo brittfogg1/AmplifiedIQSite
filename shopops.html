@@ -237,6 +237,14 @@
       font-size: 0.82rem; color: var(--muted);
       padding: 0.55rem 0.35rem 0.2rem;
     }
+    .shot-hangtag {
+      max-width: 240px;
+    }
+    .shot-hangtag img {
+      min-height: 0;
+      object-fit: contain;
+      background: transparent;
+    }
 
     /* Feature grids */
     .feature-grid {
@@ -264,8 +272,19 @@
       display: grid; gap: 1.25rem;
       grid-template-columns: repeat(2, 1fr);
     }
-    .pulse-grid .feature-card:first-child {
+    .pulse-grid .feature-card:first-child,
+    .pulse-grid .pulse-wide {
       grid-column: 1 / -1;
+    }
+    .shot-stack {
+      display: flex;
+      flex-direction: column;
+    }
+    .shot-stack .shot-frame:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+    .band-navy .shot-stack .shot-frame:last-child {
+      border-bottom-color: rgba(255,255,255,0.1);
     }
     .band-navy .feature-card {
       background: rgba(255,255,255,0.04);
@@ -347,9 +366,11 @@
       }
       .journey-item:nth-child(even) .journey-copy,
       .journey-item:nth-child(even) .journey-media { order: initial; }
-      .pulse-grid .feature-card:first-child { grid-column: auto; }
+      .pulse-grid .feature-card:first-child,
+      .pulse-grid .pulse-wide { grid-column: auto; }
       .pos-vs { padding: 0.25rem 0; }
       .nav a:not(.nav-cta) { display: none; }
+      .shot-hangtag { justify-self: center; }
     }
   </style>
 </head>
@@ -641,7 +662,7 @@
                 <span class="pill pill-trust">They leave confident — and come back</span>
               </div>
             </div>
-            <figure class="journey-media shot-frame">
+            <figure class="journey-media shot-frame shot-hangtag">
               <img src="images/Pickup-Next-Sales.png" alt="ShopOps pickup and next sales" />
               <figcaption>Pickup — close the loop, open the next one</figcaption>
             </figure>
@@ -722,24 +743,30 @@
               <p>Today’s flow — calls, shows, approvals, cars in process — in one place you can trust at a glance.</p>
             </div>
           </article>
-          <article class="feature-card">
-            <figure class="shot-frame">
-              <img src="images/Know-Your-Numbers.png" alt="ShopOps key numbers view" />
-              <figcaption>Know your numbers</figcaption>
-            </figure>
+          <article class="feature-card pulse-wide">
+            <div class="shot-stack">
+              <figure class="shot-frame">
+                <img src="images/Know-Your-Numbers.png" alt="ShopOps shop financials with this week’s revenue, profit, and margins" />
+                <figcaption>This week — refreshed from AMS</figcaption>
+              </figure>
+              <figure class="shot-frame">
+                <img src="images/Actuals-And-Projections.png" alt="ShopOps actuals and projections chart showing trend and forecast" />
+                <figcaption>Actuals, trend, and forecast</figcaption>
+              </figure>
+            </div>
             <div class="feature-body">
               <h3>Know your numbers</h3>
-              <p>The operating numbers that matter for running the shop — visible without waiting on month-end.</p>
+              <p>Refresh invoices from AMS and you already know the day and the week — no waiting on the WBR sometime Monday. Profitability, not just total revenue. See the trend. Forecast what’s coming.</p>
             </div>
           </article>
           <article class="feature-card">
             <figure class="shot-frame">
-              <img src="images/Know-The-Math.png" alt="ShopOps conversion and margin math" />
+              <img src="images/Know-The-Math.png" alt="ShopOps browser extension calculating GPPH on an AMS repair order" />
               <figcaption>Know the math</figcaption>
             </figure>
             <div class="feature-body">
               <h3>Know the math</h3>
-              <p>Conversion and mix aren’t mysteries. See where the funnel pays and where it leaks.</p>
+              <p>GPPH without the spreadsheet. The ShopOps browser extension sits on the AMS repair order and calculates Gross Profit Per Hour from the job in front of you — so nobody opens Excel and types every number in just to get GPPH.</p>
             </div>
           </article>
           <article class="feature-card">
