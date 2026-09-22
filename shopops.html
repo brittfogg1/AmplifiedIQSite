@@ -367,6 +367,38 @@
       align-items: center;
     }
 
+    /* Demos — rendered from the DEMOS list at the bottom of this page */
+    .demo-stage {
+      display: grid; gap: 1.25rem; align-items: start;
+      grid-template-columns: 1.65fr 0.75fr;
+    }
+    .demo-player video {
+      width: 100%; height: auto; aspect-ratio: 16 / 9;
+      border-radius: 10px; background: var(--navy-deep);
+    }
+    .demo-list {
+      list-style: none; display: flex; flex-direction: column; gap: 0.65rem;
+    }
+    .demo-list a {
+      display: block; background: var(--white);
+      border: 1px solid var(--line); border-radius: 12px;
+      padding: 0.9rem 1rem;
+      scroll-margin-top: 5.5rem;
+    }
+    .demo-list a:hover { border-color: var(--accent); }
+    .demo-list a[aria-current="true"] {
+      border-color: var(--accent-bright);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.16);
+    }
+    .demo-name {
+      display: block; font-weight: 700; color: var(--navy);
+    }
+    .demo-summary {
+      display: block; margin-top: 0.25rem;
+      color: var(--muted); font-size: 0.88rem;
+    }
+    #demos { scroll-margin-top: 4.5rem; }
+
     /* Mobile */
     @media (max-width: 900px) {
       .hero-grid,
@@ -385,7 +417,8 @@
       .pos-vs { padding: 0.25rem 0; }
       .nav a:not(.nav-cta) { display: none; }
       .shot-hangtag { justify-self: center; }
-      .journey-media.shot-pair { grid-template-columns: 1fr; }
+      .journey-media.shot-pair,
+      .demo-stage { grid-template-columns: 1fr; }
       .shot-pair .shot-timeclock {
         max-width: 240px;
         justify-self: center;
@@ -405,6 +438,7 @@
         <a href="#journey">Journey</a>
         <a href="#cracks">Nothing drops</a>
         <a href="#pulse">Leadership pulse</a>
+        <a href="#demos">Demos</a>
         <a href="#cta" class="nav-cta">Book a walkthrough</a>
       </nav>
     </div>
@@ -824,7 +858,25 @@
       </div>
     </section>
 
-    <!-- 6. Closing CTA -->
+    <!-- 6. Demos -->
+    <section id="demos" class="band-mist" aria-labelledby="demos-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow" style="color: var(--accent);">Demos</p>
+          <h2 id="demos-title">Watch a workflow run.</h2>
+          <p class="section-sub">Marketing, intake, the estimator, and operations are up. Each workflow gets its own walkthrough as it’s ready.</p>
+        </div>
+        <div class="demo-stage">
+          <figure class="demo-player shot-frame">
+            <video id="demo-video" controls playsinline preload="metadata" width="1920" height="1080"></video>
+            <figcaption id="demo-caption"></figcaption>
+          </figure>
+          <ul class="demo-list" id="demo-list" aria-label="Workflow demos"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Closing CTA -->
     <section id="cta" class="cta" aria-labelledby="cta-title">
       <div class="container">
         <p class="eyebrow" style="color: var(--accent);">Next step</p>
@@ -835,6 +887,7 @@
         </p>
         <div class="cta-actions">
           <a class="btn btn-dark" href="mailto:britt.fogg@amplifiediq.ai?subject=ShopOps%20walkthrough">Book a walkthrough</a>
+          <a class="btn btn-outline" href="#demos">Watch demos</a>
           <a class="btn btn-outline" href="#journey">See it live</a>
         </div>
       </div>
@@ -847,5 +900,106 @@
       <p>Cars in. Cars out. Nothing lost in between.</p>
     </div>
   </footer>
+  <script>
+    // Add a walkthrough by appending an object. id is the link: shopops.html#demo-intake
+    var DEMOS = [
+      {
+        id: "marketing",
+        title: "Marketing",
+        summary: "Know which spend puts cars on the board.",
+        src: "video/ShopOps-marketing.mp4"
+      },
+      {
+        id: "intake",
+        title: "Intake",
+        summary: "Walk-in to write-up without the scramble.",
+        src: "video/ShopOps-intake.mp4"
+      },
+      {
+        id: "estimator",
+        title: "Estimator",
+        summary: "Present, coach objections, close.",
+        src: "video/ShopOps-estimator.mp4"
+      },
+      {
+        id: "operations",
+        title: "Operations",
+        summary: "The floor knows what’s next.",
+        src: "video/ShopOps-operations.mp4"
+      }
+    ];
+
+    (function () {
+      var list = document.getElementById("demo-list");
+      var video = document.getElementById("demo-video");
+      var caption = document.getElementById("demo-caption");
+      var currentId = null;
+      if (!list || !video || !DEMOS.length) return;
+
+      DEMOS.forEach(function (demo) {
+        var item = document.createElement("li");
+        var link = document.createElement("a");
+        var name = document.createElement("span");
+        var summary = document.createElement("span");
+        link.href = "#demo-" + demo.id;
+        link.dataset.demoId = demo.id;
+        name.className = "demo-name";
+        name.textContent = demo.title;
+        summary.className = "demo-summary";
+        summary.textContent = demo.summary;
+        link.appendChild(name);
+        link.appendChild(summary);
+        item.appendChild(link);
+        list.appendChild(item);
+      });
+
+      function findDemo(id) {
+        for (var i = 0; i < DEMOS.length; i++) {
+          if (DEMOS[i].id === id) return DEMOS[i];
+        }
+        return DEMOS[0];
+      }
+
+      function idFromHash() {
+        var hash = location.hash.replace(/^#/, "");
+        return hash.indexOf("demo-") === 0 ? hash.slice(5) : null;
+      }
+
+      function show(id, play) {
+        var demo = findDemo(id);
+        var links = list.querySelectorAll("a");
+        if (currentId !== demo.id) {
+          currentId = demo.id;
+          video.src = demo.src;
+          video.setAttribute("aria-label", demo.title + " workflow demo");
+        }
+        caption.textContent = demo.title + " — " + demo.summary;
+        for (var i = 0; i < links.length; i++) {
+          if (links[i].dataset.demoId === demo.id) links[i].setAttribute("aria-current", "true");
+          else links[i].removeAttribute("aria-current");
+        }
+        if (play) {
+          var pending = video.play();
+          if (pending && pending.catch) pending.catch(function () {});
+        }
+      }
+
+      window.addEventListener("hashchange", function () {
+        var id = idFromHash();
+        if (id) show(id, true);
+      });
+
+      list.addEventListener("click", function (event) {
+        var link = event.target.closest("a");
+        if (!link) return;
+        if (location.hash === link.getAttribute("href")) {
+          event.preventDefault();
+          show(link.dataset.demoId, true);
+        }
+      });
+
+      show(idFromHash() || DEMOS[0].id, false);
+    })();
+  </script>
 </body>
 </html>
