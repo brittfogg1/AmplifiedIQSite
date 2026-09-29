@@ -103,9 +103,39 @@
       color: var(--white);
       padding: 4.5rem 0 4rem;
     }
+    .hero-stage { position: relative; }
     .hero-grid {
       display: grid; gap: 1.25rem; align-items: center;
       grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    }
+    .hero-pane-copy {
+      animation: heroShowCopy 16s ease-in-out infinite;
+    }
+    .hero-pane-story {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      animation: heroShowStory 16s ease-in-out infinite;
+    }
+    .hero-pane-story img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 16px;
+    }
+    @keyframes heroShowCopy {
+      0%, 40% { opacity: 1; pointer-events: auto; }
+      50%, 90% { opacity: 0; pointer-events: none; }
+      100% { opacity: 1; pointer-events: auto; }
+    }
+    @keyframes heroShowStory {
+      0%, 40% { opacity: 0; }
+      50%, 90% { opacity: 1; }
+      100% { opacity: 0; }
     }
     .eyebrow {
       display: inline-block; font-size: 0.78rem; font-weight: 700;
@@ -665,7 +695,13 @@
       .hero-cycle { display: flex; justify-content: center; }
       .vis-grid { grid-template-columns: 1fr; }
     }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-pane-copy,
+      .hero-pane-story { animation: none; }
+      .hero-pane-story { display: none; }
+    }
     @media (max-width: 640px) {
+      .hero-stage { min-height: 0; }
       .hero-cycle { height: 400px; overflow: hidden; }
       .hero-cycle .loop {
         position: absolute;
@@ -697,7 +733,8 @@
   <main id="top">
     <!-- 1. Hero -->
     <section class="hero" aria-labelledby="hero-title">
-      <div class="container hero-grid">
+      <div class="container hero-stage">
+        <div class="hero-grid hero-pane-copy">
         <div>
           <p class="eyebrow">ShopOps · One job</p>
           <h1 id="hero-title">Turn every customer opportunity into more revenue.</h1>
@@ -732,6 +769,10 @@
               <li style="--a:256.15deg; --dot:#38bdf8"><i class="loop-dot" aria-hidden="true"></i><span class="loop-label"><strong>Next Sale</strong></span></li>
             </ol>
           </div>
+        </div>
+        </div>
+        <div class="hero-pane-story" aria-hidden="true">
+          <img src="images/ShopOpsStory.png" alt="">
         </div>
       </div>
     </section>
